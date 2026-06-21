@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ro" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Retail Operations Coordinator — Aplică prin Zebra People">
+  <title>Retail Operations Coordinator — Zebra People</title>
+  <link rel="icon" href="brand_assets/Favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="brand_assets/Webclip.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brand: '#E321D7', 'brand-dim': 'rgba(227,33,215,0.12)' },
+          fontFamily: { display: ['Plus Jakarta Sans', 'sans-serif'], body: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background-color: #FAFAFA; color: #1A1A1A; font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    body::after { content: ''; position: fixed; inset: 0; z-index: 9998; pointer-events: none; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 200px 200px; }
+    ::-webkit-scrollbar { width: 3px; } ::-webkit-scrollbar-track { background: #FAFAFA; } ::-webkit-scrollbar-thumb { background: #E321D7; border-radius: 2px; }
+    .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .lang-nav-inner { display: flex; align-items: center; gap: 0; margin-left: 14px; }
+    .lang-top-btn { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; color: #A1A1AA; text-decoration: none; padding: 3px 8px; border-radius: 3px; border: 1px solid transparent; cursor: pointer; background: none; transition: color 0.2s; }
+    .lang-top-btn.active { color: #71717A; border-color: #DBC0D8; }
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 16px 24px; background: rgba(255,255,255,0.97); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid #F0E6EF; box-shadow: 0 1px 12px rgba(0,0,0,0.4); transition: background 0.35s ease, backdrop-filter 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease; }
+    #navbar.scrolled { background: rgba(255,255,255,0.99); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom-color: #F0E6EF; box-shadow: 0 1px 16px rgba(0,0,0,0.55); }
+    .navbar-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .navbar-left { display: flex; align-items: center; flex-shrink: 0; }
+    .navbar-center { display: flex; justify-content: center; align-items: center; flex: 1; }
+    .navbar-right { display: flex; align-items: center; justify-content: flex-end; flex-shrink: 0; gap: 16px; }
+    .nav-link { color: #71717A; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 500; text-decoration: none; transition: color 0.2s ease; position: relative; white-space: nowrap; }
+    .nav-link::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: #E321D7; transition: width 0.25s ease; }
+    .nav-link:hover { color: #E321D7; } .nav-link:hover::after { width: 100%; }
+    .nav-link:focus-visible { outline: 2px solid #E321D7; outline-offset: 4px; border-radius: 3px; }
+    .btn-nav-cta { display: inline-flex; align-items: center; background: #E321D7; color: #fff; padding: 8px 18px; border-radius: 7px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; text-decoration: none; white-space: nowrap; border: none; cursor: pointer; box-shadow: 0 2px 10px rgba(227,33,215,0.35), 0 1px 3px rgba(0,0,0,0.4); transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease; }
+    .btn-nav-cta:hover { transform: translateY(-1px) scale(1.02); box-shadow: 0 5px 20px rgba(227,33,215,0.5), 0 2px 6px rgba(0,0,0,0.5); }
+    .btn-nav-cta:active { transform: translateY(0) scale(0.97); }
+    #mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(255,255,255,0.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid #F0E6EF; padding: 28px 24px 32px; z-index: 999; }
+    #mobile-menu.open { display: block; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #E321D7; color: #fff; padding: 12px 26px; border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: -0.01em; text-decoration: none; white-space: nowrap; border: none; cursor: pointer; box-shadow: 0 2px 12px rgba(227,33,215,0.4), 0 1px 3px rgba(0,0,0,0.5); transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease; }
+    .btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 6px 28px rgba(227,33,215,0.55), 0 2px 8px rgba(0,0,0,0.6); }
+    .btn-primary:active { transform: translateY(0) scale(0.97); }
+    .form-group { display: flex; flex-direction: column; gap: 7px; }
+    .form-label { font-size: 12px; font-weight: 600; color: #71717A; letter-spacing: 0.02em; font-family: 'Inter', sans-serif; }
+    .form-input { background: rgba(0,0,0,0.03); border: 1px solid #F0E6EF; border-radius: 10px; padding: 13px 16px; color: #1A1A1A; font-family: 'Inter', sans-serif; font-size: 15px; outline: none; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s; width: 100%; }
+    .form-input::placeholder { color: #A1A1AA; }
+    .form-input:focus { border-color: #E321D7; background: rgba(227,33,215,0.04); box-shadow: 0 0 0 3px rgba(227,33,215,0.12); }
+    .form-input[type="file"] { padding: 10px 16px; cursor: pointer; }
+    .form-input[type="file"]::file-selector-button { background: rgba(227,33,215,0.12); border: 1px solid rgba(227,33,215,0.3); color: #E321D7; border-radius: 6px; padding: 6px 14px; font-size: 12px; font-weight: 600; cursor: pointer; margin-right: 12px; font-family: 'Inter', sans-serif; transition: background 0.2s; }
+    .form-input[type="file"]::file-selector-button:hover { background: rgba(227,33,215,0.22); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .job-split { display: grid; grid-template-columns: 2fr 3fr; gap: 32px; align-items: start; }
+    .job-list-panel { position: sticky; top: 96px; }
+    .job-list-heading { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; color: #A1A1AA; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+    .job-list-item { display: block; text-decoration: none; background: #FFFFFF; border: 1px solid #F4ECF3; border-left: 3px solid transparent; border-radius: 10px; padding: 16px 18px; margin-bottom: 8px; cursor: pointer; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s; }
+    .job-list-item:hover:not(.active) { border-color: #EBD5E9; border-left-color: rgba(227,33,215,0.4); background: rgba(0,0,0,0.015); }
+    .job-list-item:focus-visible { outline: 2px solid #E321D7; outline-offset: 2px; }
+    .job-list-item.active { background: #FFFFFF; border-color: #F0E6EF; border-left-color: #E321D7; box-shadow: 0 2px 12px rgba(0,0,0,0.4), 0 0 20px rgba(227,33,215,0.06); }
+    .job-list-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700; color: #1A1A1A; margin-bottom: 4px; }
+    .job-list-company { font-size: 12px; color: #E321D7; font-weight: 600; letter-spacing: 0.04em; margin-bottom: 6px; }
+    .job-list-meta { font-size: 12px; color: #A1A1AA; line-height: 1.5; }
+    .job-detail-block { background: #FFFFFF; border: 1px solid #F0E6EF; border-radius: 16px; padding: 40px; margin-bottom: 24px; }
+    .job-title-h { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(24px,3.5vw,36px); font-weight: 800; letter-spacing: -0.03em; color: #1A1A1A; margin-bottom: 10px; line-height: 1.1; }
+    .job-company-tag { font-size: 11px; font-weight: 700; color: #E321D7; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
+    .job-meta-row { font-size: 13px; color: #71717A; margin-bottom: 24px; line-height: 1.6; }
+    .job-divider { border: none; border-top: 1px solid #F0E6EF; margin: 0 0 24px; }
+    .job-desc { font-size: 15px; color: #71717A; line-height: 1.75; margin-bottom: 28px; }
+    .job-section-title { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; color: #A1A1AA; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 14px; }
+    .job-list-ul { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .job-list-ul li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: #71717A; line-height: 1.6; }
+    .job-list-ul li .bullet { color: #E321D7; flex-shrink: 0; margin-top: 2px; }
+    .job-form-block { background: #FFFFFF; border: 1px solid #F0E6EF; border-radius: 16px; padding: 40px; }
+    .job-form-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: #1A1A1A; margin-bottom: 28px; }
+    .job-list-mobile { display: none; margin-top: 32px; }
+    .job-list-mobile-toggle { width: 100%; background: rgba(0,0,0,0.03); border: 1px solid #F0E6EF; border-radius: 10px; padding: 14px 18px; color: #71717A; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; text-align: left; display: flex; align-items: center; justify-content: space-between; transition: background 0.2s, border-color 0.2s; }
+    .job-list-mobile-toggle:hover { background: #F0E6EF; border-color: #DBC0D8; }
+    .job-list-mobile-inner { padding-top: 12px; }
+    .job-list-mobile-inner.hidden-list { display: none; }
+    @media (max-width: 768px) { .job-split { grid-template-columns: 1fr; } .job-list-panel { display: none; } .job-list-mobile { display: block; } .footer-grid { grid-template-columns: 1fr !important; } .job-detail-block { padding: 24px; } .job-form-block { padding: 24px; } }
+    @media (max-width: 540px) { .form-row-2 { grid-template-columns: 1fr !important; } }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="navbar-inner">
+    <div class="navbar-left">
+      <a href="index.html"><img src="brand_assets/Zebra%20Dark.svg" alt="Zebra People" style="height:64px;width:auto;" /></a>
+    </div>
+    <div class="navbar-center hidden md:flex" style="gap:28px;">
+      <a href="index.html#ce-facem" class="nav-link">Cum Lucrăm</a>
+      <a href="index.html#servicii" class="nav-link">Soluții</a>
+      <a href="index.html#industrii" class="nav-link">Angajează</a>
+      <a href="index.html#joburi-active" class="nav-link" style="color:#E321D7;">Joburi Active</a>
+      <a href="https://diviziamedicala.ro" target="_blank" rel="noopener" class="nav-link" style="display:inline-flex;align-items:center;gap:5px;">
+        <span style="display:inline-flex;align-items:center;justify-content:center;width:13px;height:13px;border:1px solid rgba(227,33,215,0.45);border-radius:2px;font-size:8px;line-height:1;flex-shrink:0;">↗</span>
+        Divizia Medicală
+        <span style="font-size:9px;font-weight:700;letter-spacing:0.05em;padding:1px 5px;border-radius:3px;background:rgba(227,33,215,0.12);color:#E321D7;border:1px solid rgba(227,33,215,0.3);">NEW</span>
+      </a>
+    </div>
+    <div class="navbar-right hidden md:flex">
+      <a href="mailto:office@zebramarket.ro" class="btn-nav-cta">Contactează-ne</a>
+      <div class="lang-nav-inner"><span class="lang-top-btn active">RO</span></div>
+    </div>
+    <button id="menu-toggle" class="md:hidden flex flex-col gap-[5px] p-2 cursor-pointer" style="margin-left:auto;" aria-label="Meniu">
+      <span class="block w-6 h-0.5 bg-gray-800 rounded transition-all duration-200" id="bar1"></span>
+      <span class="block w-6 h-0.5 bg-gray-800 rounded transition-all duration-200" id="bar2"></span>
+      <span class="block w-4 h-0.5 bg-gray-800 rounded transition-all duration-200" id="bar3"></span>
+    </button>
+  </div>
+</nav>
+
+<div id="mobile-menu">
+  <div class="flex flex-col gap-5">
+    <a href="index.html#ce-facem" class="nav-link mobile-close" style="font-size:16px;">Cum Lucrăm</a>
+    <a href="index.html#servicii" class="nav-link mobile-close" style="font-size:16px;">Soluții</a>
+    <a href="index.html#industrii" class="nav-link mobile-close" style="font-size:16px;">Angajează</a>
+    <a href="index.html#joburi-active" class="nav-link mobile-close" style="font-size:16px;color:#E321D7;">Joburi Active</a>
+    <a href="https://diviziamedicala.ro" target="_blank" rel="noopener" class="nav-link mobile-close" style="font-size:16px;display:inline-flex;align-items:center;gap:6px;">
+      <span style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border:1px solid rgba(227,33,215,0.45);border-radius:2px;font-size:9px;line-height:1;flex-shrink:0;">↗</span>
+      Divizia Medicală
+      <span style="font-size:9px;font-weight:700;letter-spacing:0.05em;padding:1px 5px;border-radius:3px;background:rgba(227,33,215,0.12);color:#E321D7;border:1px solid rgba(227,33,215,0.3);">NEW</span>
+    </a>
+    <div style="border-top:1px solid #F0E6EF;padding-top:20px;">
+      <a href="mailto:office@zebramarket.ro" class="btn-nav-cta mobile-close" style="width:100%;justify-content:center;">Contactează-ne</a>
+    </div>
+  </div>
+</div>
+
+<main style="padding-top:96px;padding-bottom:80px;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px;">
+    <div class="job-split">
+
+      <aside class="job-list-panel">
+        <div class="job-list-heading">Joburi Active</div>
+        <a href="job-sales-manager.html" class="job-list-item">
+          <div class="job-list-title">Sales Manager</div>
+          <div class="job-list-company">Industria fitness</div>
+          <div class="job-list-meta">Full-time · Pipera, București · On-site</div>
+        </a>
+        <a href="job-chief-accountant.html" class="job-list-item">
+          <div class="job-list-title">Chief Accountant</div>
+          <div class="job-list-company">Retail &amp; E-commerce</div>
+          <div class="job-list-meta">Full-time · București · Hybrid</div>
+        </a>
+        <a href="job-cto.html" class="job-list-item">
+          <div class="job-list-title">CTO</div>
+          <div class="job-list-company">Transformare digitală</div>
+          <div class="job-list-meta">Contract mandat · București · Sky Tower</div>
+        </a>
+        <a href="job-production-manager.html" class="job-list-item">
+          <div class="job-list-title">Production Manager</div>
+          <div class="job-list-company">Producție alimentară</div>
+          <div class="job-list-meta">Full-time · Tecuci · On-site</div>
+        </a>
+        <a href="job-ecommerce-manager.html" class="job-list-item">
+          <div class="job-list-title">E-commerce Manager</div>
+          <div class="job-list-company">Retail &amp; Luxury</div>
+          <div class="job-list-meta">Full-time · București · Sky Tower</div>
+        </a>
+        <a href="job-marketing-specialist.html" class="job-list-item">
+          <div class="job-list-title">Marketing Specialist</div>
+          <div class="job-list-company">Clinică premium</div>
+          <div class="job-list-meta">Full-time · București · Hybrid</div>
+        </a>
+        <a href="job-retail-operations.html" class="job-list-item active">
+          <div class="job-list-title">Retail Operations Coordinator</div>
+          <div class="job-list-company">Retail specializat</div>
+          <div class="job-list-meta">Full-time · București · On-site</div>
+        </a>
+      </aside>
+
+      <div>
+        <div class="job-detail-block">
+          <h1 class="job-title-h">Retail Operations Coordinator</h1>
+          <div class="job-company-tag">Retail specializat</div>
+          <div class="job-meta-row">Full-time &nbsp;|&nbsp; București • On-site + deplasări naționale &nbsp;|&nbsp; Negociabil</div>
+          <hr class="job-divider">
+          <p class="job-desc">Companie românească din zona de retail specializat, cu prezență națională printr-o rețea de agenții fizice și o componentă de e-commerce în dezvoltare. Rolul coordonează direct 5 manageri zonali administrativi și oferă expunere directă la coordonarea unei rețele naționale, autonomie în organizarea activităților și responsabilitate operațională pe mai multe regiuni.</p>
+
+          <div class="job-section-title">Responsabilități</div>
+          <ul class="job-list-ul">
+            <li><span class="bullet">→</span><span>Coordonarea activității managerilor zonali și alinierea modului de lucru la nivel de rețea</span></li>
+            <li><span class="bullet">→</span><span>Asigurarea aprovizionării agențiilor cu materiale necesare</span></li>
+            <li><span class="bullet">→</span><span>Planificarea și monitorizarea activităților administrative și operaționale</span></li>
+            <li><span class="bullet">→</span><span>Implementarea și standardizarea procedurilor și fluxurilor de lucru</span></li>
+            <li><span class="bullet">→</span><span>Gestionarea flotei auto (ITP, asigurări, monitorizare, mentenanță)</span></li>
+            <li><span class="bullet">→</span><span>Monitorizarea costurilor administrative și identificarea oportunităților de optimizare</span></li>
+          </ul>
+
+          <div class="job-section-title">Profilul candidatului</div>
+          <ul class="job-list-ul">
+            <li><span class="bullet">→</span><span>Minimum 3–5 ani experiență în roluri de operațiuni / administrativ / retail</span></li>
+            <li><span class="bullet">→</span><span>Experiență în coordonarea echipelor sau a activităților la nivel de rețea</span></li>
+            <li><span class="bullet">→</span><span>Abilități foarte bune de organizare și prioritizare</span></li>
+            <li><span class="bullet">→</span><span>Experiență în gestionarea furnizorilor și a costurilor</span></li>
+          </ul>
+        </div>
+
+        <div class="job-form-block">
+          <h2 class="job-form-title">Aplică pentru acest rol</h2>
+          <form action="mailto:office@zebramarket.ro" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="position" value="Retail Operations Coordinator">
+            <div class="form-row-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+              <div class="form-group">
+                <label class="form-label">Nume complet *</label>
+                <input type="text" name="name" class="form-input" placeholder="Ion Popescu" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email *</label>
+                <input type="email" name="email" class="form-input" placeholder="ion@email.ro" required>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:16px;">
+              <label class="form-label">Telefon *</label>
+              <input type="tel" name="phone" class="form-input" placeholder="+40 7xx xxx xxx" required>
+            </div>
+            <div class="form-group" style="margin-bottom:16px;">
+              <label class="form-label">Mesaj / Scrisoare de intenție</label>
+              <textarea name="message" class="form-input" rows="4" placeholder="Povestește-ne puțin despre experiența ta și motivația pentru acest rol..."></textarea>
+            </div>
+            <div class="form-group" style="margin-bottom:28px;">
+              <label class="form-label">CV *</label>
+              <input type="file" name="cv" class="form-input" accept=".pdf,.doc,.docx" required>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;justify-content:center;font-size:15px;padding:15px 24px;">
+              Trimite aplicația
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </form>
+        </div>
+
+        <div class="job-list-mobile">
+          <button class="job-list-mobile-toggle" id="mobile-jobs-toggle" aria-expanded="false">
+            <span>Vezi alte joburi active</span>
+            <svg id="mobile-jobs-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" style="transition:transform 0.2s;flex-shrink:0;"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="job-list-mobile-inner hidden-list" id="mobile-jobs-list">
+            <a href="job-sales-manager.html" class="job-list-item"><div class="job-list-title">Sales Manager</div><div class="job-list-company">Industria fitness</div><div class="job-list-meta">Full-time · Pipera, București · On-site</div></a>
+            <a href="job-chief-accountant.html" class="job-list-item"><div class="job-list-title">Chief Accountant</div><div class="job-list-company">Retail &amp; E-commerce</div><div class="job-list-meta">Full-time · București · Hybrid</div></a>
+            <a href="job-cto.html" class="job-list-item"><div class="job-list-title">CTO</div><div class="job-list-company">Transformare digitală</div><div class="job-list-meta">Contract mandat · București · Sky Tower</div></a>
+            <a href="job-production-manager.html" class="job-list-item"><div class="job-list-title">Production Manager</div><div class="job-list-company">Producție alimentară</div><div class="job-list-meta">Full-time · Tecuci · On-site</div></a>
+            <a href="job-ecommerce-manager.html" class="job-list-item"><div class="job-list-title">E-commerce Manager</div><div class="job-list-company">Retail &amp; Luxury</div><div class="job-list-meta">Full-time · București · Sky Tower</div></a>
+            <a href="job-marketing-specialist.html" class="job-list-item"><div class="job-list-title">Marketing Specialist</div><div class="job-list-company">Clinică premium</div><div class="job-list-meta">Full-time · București · Hybrid</div></a>
+            <a href="job-retail-operations.html" class="job-list-item active"><div class="job-list-title">Retail Operations Coordinator</div><div class="job-list-company">Retail specializat</div><div class="job-list-meta">Full-time · București · On-site</div></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer style="border-top:1px solid #F4ECF3;padding:64px 24px 40px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div class="footer-grid">
+      <div>
+        <img src="brand_assets/Zebra%20Dark.svg" alt="Zebra People" style="height:28px;width:auto;margin-bottom:18px;opacity:0.85;">
+        <p style="color:#A1A1AA;font-size:14px;line-height:1.75;max-width:260px;margin-bottom:20px;">Din fiecare afacere de succes<br>se ascunde un recrutor bun.</p>
+        <a href="https://www.linkedin.com/company/zebra-people-hr/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;color:#A1A1AA;font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#E321D7'" onmouseout="this.style.color='#A1A1AA'">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <div>
+        <h4 class="font-display" style="font-size:13px;font-weight:700;color:#71717A;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:18px;">Servicii</h4>
+        <ul style="display:flex;flex-direction:column;gap:10px;list-style:none;">
+          <li><a href="index.html#servicii" style="color:#A1A1AA;font-size:14px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#E321D7'" onmouseout="this.style.color='#A1A1AA'">Success Fee</a></li>
+          <li><a href="index.html#servicii" style="color:#A1A1AA;font-size:14px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#E321D7'" onmouseout="this.style.color='#A1A1AA'">Abonament Recrutare</a></li>
+          <li><a href="https://diviziamedicala.ro" style="color:#A1A1AA;font-size:14px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#E321D7'" onmouseout="this.style.color='#A1A1AA'">Divizia Medicală</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-display" style="font-size:13px;font-weight:700;color:#71717A;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:18px;">Companie</h4>
+        <ul style="display:flex;flex-direction:column;gap:10px;list-style:none;">
+          <li><a href="index.html#industrii" style="color:#A1A1AA;font-size:14px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#E321D7'" onmouseout="this.style.color='#A1A1AA'">Industrii</a></li>
+          <li><a href="index.html#contact" style="color:#A1A1AA;font-size:14px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#E321D7'" onmouseout="this.style.color='#A1A1AA'">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-display" style="font-size:13px;font-weight:700;color:#71717A;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:18px;">Joburi</h4>
+        <ul style="display:flex;flex-direction:column;gap:10px;list-style:none;">
+          <li><a href="index.html#joburi-active" style="color:#A1A1AA;font-size:14px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#E321D7'" onmouseout="this.style.color='#A1A1AA'">Joburi Active</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="border-top:1px solid #F4ECF3;padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;">
+      <p style="color:#A1A1AA;font-size:13px;">© 2024 Zebra People. Toate drepturile rezervate.</p>
+      <div style="display:flex;gap:20px;">
+        <a href="#" style="color:#A1A1AA;font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#666'" onmouseout="this.style.color='#A1A1AA'">Politică de Confidențialitate</a>
+        <a href="#" style="color:#A1A1AA;font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#666'" onmouseout="this.style.color='#A1A1AA'">Termeni și Condiții</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  let open = false;
+  toggle.addEventListener('click', () => {
+    open = !open; menu.classList.toggle('open', open);
+    document.getElementById('bar3').style.width = open ? '24px' : '16px';
+    document.getElementById('bar1').style.transform = open ? 'translateY(6px) rotate(45deg)' : '';
+    document.getElementById('bar2').style.opacity = open ? '0' : '1';
+    document.getElementById('bar3').style.transform = open ? 'translateY(-6px) rotate(-45deg)' : '';
+  });
+  document.querySelectorAll('.mobile-close').forEach(el => {
+    el.addEventListener('click', () => {
+      open = false; menu.classList.remove('open');
+      document.getElementById('bar1').style.transform = '';
+      document.getElementById('bar2').style.opacity = '1';
+      document.getElementById('bar3').style.transform = '';
+      document.getElementById('bar3').style.width = '16px';
+    });
+  });
+  const mjToggle = document.getElementById('mobile-jobs-toggle');
+  const mjList = document.getElementById('mobile-jobs-list');
+  const mjArrow = document.getElementById('mobile-jobs-arrow');
+  if (mjToggle) {
+    mjToggle.addEventListener('click', () => {
+      const expanded = mjToggle.getAttribute('aria-expanded') === 'true';
+      mjToggle.setAttribute('aria-expanded', String(!expanded));
+      mjList.classList.toggle('hidden-list', expanded);
+      mjArrow.style.transform = expanded ? '' : 'rotate(180deg)';
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zebra People — Romanian recruitment agency. We connect ambitious businesses with exceptional talent. Success Fee & Subscription Recruitment.">
+  <title>Zebra People — Recruitment that makes a difference</title>
+  <link rel="icon" href="brand_assets/Favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="brand_assets/Webclip.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#E321D7',
+            'brand-dim': 'rgba(227,33,215,0.12)',
+          },
+          fontFamily: {
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #FAFAFA;
+      color: #1A1A1A;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      z-index: 9998; pointer-events: none; opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 200px 200px;
+    }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: #FAFAFA; }
+    ::-webkit-scrollbar-thumb { background: #E321D7; border-radius: 2px; }
+
+    .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #E321D7 0%, #ff7cf8 50%, #E321D7 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: grad 5s linear infinite;
+    }
+    @keyframes grad { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+
+    /* ---- Lang toggle (inline in navbar) ---- */
+    .lang-nav-inner { display: flex; align-items: center; gap: 0; margin-left: 14px; }
+    .lang-top-btn {
+      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.06em; color: #A1A1AA; text-decoration: none;
+      padding: 3px 8px; border-radius: 3px; border: 1px solid transparent;
+      cursor: pointer; background: none; transition: color 0.2s;
+    }
+    .lang-top-btn.active { color: #71717A; border-color: #DBC0D8; }
+    .lang-top-btn:not(.active):hover { color: #71717A; }
+    .lang-top-sep { font-size: 10px; color: #A1A1AA; margin: 0 1px; }
+
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 16px 24px;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid #F0E6EF;
+      box-shadow: 0 1px 12px rgba(0, 0, 0, 0.07);
+      transition: background 0.35s ease, backdrop-filter 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    #navbar.scrolled {
+      background: rgba(255,255,255,0.99);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom-color: #F0E6EF;
+      box-shadow: 0 1px 16px rgba(0, 0, 0, 0.09);
+    }
+    .navbar-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .navbar-left { display: flex; align-items: center; flex-shrink: 0; }
+    .navbar-center { display: flex; justify-content: center; align-items: center; flex: 1; }
+    .navbar-right { display: flex; align-items: center; justify-content: flex-end; flex-shrink: 0; gap: 16px; }
+    .nav-link {
+      color: #71717A; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 500;
+      text-decoration: none; transition: color 0.2s ease; position: relative; white-space: nowrap;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1px; background: #E321D7; transition: width 0.25s ease;
+    }
+    .nav-link:hover { color: #E321D7; }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link:focus-visible { outline: 2px solid #E321D7; outline-offset: 4px; border-radius: 3px; }
+
+    /* ---- Navbar CTA ---- */
+    .btn-nav-cta {
+      display: inline-flex; align-items: center;
+      background: #E321D7; color: #fff;
+      padding: 8px 18px; border-radius: 7px;
+      font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px;
+      letter-spacing: -0.01em; text-decoration: none; white-space: nowrap;
+      border: none; cursor: pointer;
+      box-shadow: 0 2px 10px rgba(227,33,215,0.35), 0 1px 3px rgba(0,0,0,0.4);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    }
+    .btn-nav-cta:hover { transform: translateY(-1px) scale(1.02); box-shadow: 0 5px 20px rgba(227,33,215,0.5), 0 2px 6px rgba(0,0,0,0.5); }
+    .btn-nav-cta:active { transform: translateY(0) scale(0.97); }
+    .btn-nav-cta:focus-visible { outline: 2px solid #E321D7; outline-offset: 3px; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #E321D7; color: #fff; padding: 12px 26px; border-radius: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 15px;
+      letter-spacing: -0.01em; text-decoration: none; white-space: nowrap;
+      border: none; cursor: pointer;
+      box-shadow: 0 2px 12px rgba(227,33,215,0.4), 0 1px 3px rgba(0,0,0,0.5);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease, opacity 0.15s;
+    }
+    .btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 6px 28px rgba(227,33,215,0.55), 0 2px 8px rgba(0,0,0,0.6); }
+    .btn-primary:active { transform: translateY(0) scale(0.97); }
+    .btn-primary:focus-visible { outline: 2px solid #E321D7; outline-offset: 3px; }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: #1A1A1A; padding: 12px 26px; border-radius: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 15px;
+      letter-spacing: -0.01em; text-decoration: none; white-space: nowrap;
+      border: 1px solid #DBC0D8; cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { transform: translateY(-2px) scale(1.02); border-color: #C0A0BE; background: #F4ECF3; }
+    .btn-outline:active { transform: translateY(0) scale(0.97); }
+
+.card {
+      background: #FFFFFF; border: 1px solid #F0E6EF;
+      border-radius: 16px; padding: 40px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.5), 0 8px 32px rgba(0,0,0,0.35);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s, box-shadow 0.3s;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(227,33,215,0.22); box-shadow: 0 2px 8px rgba(0,0,0,0.5), 0 16px 48px rgba(0,0,0,0.4), 0 0 40px rgba(227,33,215,0.09); }
+
+    .icon-chip {
+      width: 46px; height: 46px; border-radius: 12px;
+      background: rgba(227,33,215,0.1); display: flex; align-items: center; justify-content: center;
+      color: #E321D7; flex-shrink: 0;
+    }
+    .dot { width: 5px; height: 5px; border-radius: 50%; background: #E321D7; flex-shrink: 0; }
+
+    .bento-item {
+      background: #FFFFFF; border: 1px solid #F0E6EF;
+      border-radius: 16px; padding: 32px; position: relative; overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s, box-shadow 0.3s;
+    }
+    .bento-item::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 0% 0%, rgba(227,33,215,0.1) 0%, transparent 55%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .bento-item:hover::before { opacity: 1; }
+    .bento-item:hover { transform: translateY(-3px); border-color: rgba(227,33,215,0.25); box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 24px rgba(227,33,215,0.07); }
+
+    .counter-val { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 52px; letter-spacing: -0.04em; line-height: 1; color: #E321D7; }
+
+    /* ---- CTA Banner ---- */
+    .cta-section { padding: 80px 24px; max-width: 1200px; margin: 0 auto; }
+    .cta-banner {
+      background: #E321D7; border: none; border-radius: 20px;
+      padding: 60px 56px; display: flex; align-items: center;
+      justify-content: space-between; gap: 40px;
+    }
+    .cta-banner-title { font-size: 36px; font-weight: 700; color: #fff; margin: 0; line-height: 1.2; }
+    .cta-banner .magenta { color: #fff; }
+    .cta-banner-divider { width: 1px; height: 60px; background: rgba(255,255,255,0.35); flex-shrink: 0; }
+    .btn-cta-primary {
+      background: #FFFFFF; color: #E321D7; border: none; border-radius: 8px;
+      padding: 16px 32px; font-size: 16px; font-weight: 600; text-decoration: none;
+      white-space: nowrap; display: inline-block; transition: opacity 0.2s ease;
+    }
+    .btn-cta-primary:hover { opacity: 0.85; }
+
+    #mobile-menu {
+      display: none; position: fixed; top: 72px; left: 0; right: 0;
+      background: #FFFFFF; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid #F0E6EF; padding: 24px 24px 32px; z-index: 999;
+    }
+    #mobile-menu.open { display: block; }
+    #mobile-menu .nav-link {
+      font-size: 22px !important; font-weight: 600 !important; color: #1A1A1A !important;
+      padding: 14px 0 !important; border-bottom: 1px solid #F0E6EF !important; display: block !important;
+    }
+    #mobile-menu .flex-col > a:last-of-type { border-bottom: none !important; }
+    #mobile-menu a[href*="diviziamedicala"] { color: #E321D7 !important; display: flex !important; align-items: center !important; }
+    #mobile-menu .close-btn, #menu-toggle {
+      color: #1A1A1A !important; background: transparent !important;
+      border: 1px solid #F0E6EF !important; border-radius: 8px !important;
+    }
+
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.65s cubic-bezier(0.34,1.56,0.64,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    .hero-glow { position: absolute; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(227,33,215,0.14) 0%, transparent 68%); }
+
+    .med-card { background: linear-gradient(135deg, #FEF0FD 0%, #FFFFFF 100%); border: 1px solid rgba(107,60,181,0.28); border-radius: 24px; overflow: hidden; position: relative; }
+    .med-card::before { content: ''; position: absolute; top: -30%; left: -15%; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(107,60,181,0.14) 0%, transparent 70%); pointer-events: none; }
+
+    .tag { display: inline-flex; align-items: center; background: rgba(227,33,215,0.1); color: #E321D7; font-size: 11px; font-weight: 700; padding: 4px 11px; border-radius: 20px; border: 1px solid rgba(227,33,215,0.22); letter-spacing: 0.02em; }
+
+    /* ---- Process cards grid ---- */
+    .process-card { border-right: 1px solid rgba(227,33,215,0.2); border-bottom: 1px solid rgba(227,33,215,0.2); }
+    .process-card:nth-child(3n) { border-right: none; }
+    .process-card:nth-child(n+4) { border-bottom: none; }
+
+    @media (max-width: 768px) {
+      .bento-wide { grid-column: span 1 !important; }
+      .med-grid { grid-template-columns: 1fr !important; }
+      .footer-grid { display: flex !important; flex-direction: column !important; gap: 40px !important; text-align: center !important; }
+      .footer-brand { width: 100% !important; display: flex !important; flex-direction: column !important; align-items: center !important; text-align: center !important; }
+      .footer-brand img { height: 32px !important; margin: 0 auto !important; }
+      .footer-brand p, .footer-tagline { font-size: 14px !important; line-height: 1.6 !important; margin: 12px auto 0 !important; max-width: 280px !important; text-align: center !important; }
+      .footer-col, .footer-nav, .footer-contact { width: 100% !important; align-items: center !important; text-align: center !important; }
+      .footer-col h4, .footer-nav h4, .footer-contact h4 { font-size: 11px !important; letter-spacing: 0.08em !important; margin-bottom: 16px !important; }
+      .footer-links, .footer-nav ul { display: flex !important; flex-direction: column !important; gap: 12px !important; align-items: center !important; }
+      .footer-links a, .footer-nav a { font-size: 15px !important; }
+      .footer-contact-item { font-size: 14px !important; margin-bottom: 12px !important; justify-content: center !important; }
+      .footer-linkedin { justify-content: center !important; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .footer-legal { flex-direction: column !important; gap: 8px !important; text-align: center !important; align-items: center !important; }
+      .cta-banner { flex-direction: column; text-align: center; padding: 40px 28px; gap: 28px; }
+      .cta-banner-divider { display: none; }
+      .cta-banner-title { font-size: 26px; }
+      .counter-val { font-size: 40px; }
+      .ce-facem-grid { grid-template-columns: 1fr !important; gap: 24px !important; margin-bottom: 48px !important; }
+      .ce-facem-grid + * { margin-top: 32px !important; }
+      #ce-facem { padding-top: 48px !important; }
+      .ce-facem-grid > div:last-child h2 { text-align: center !important; }
+      .ce-facem-grid > div:last-child p { text-align: center !important; }
+      .process-cards { grid-template-columns: 1fr !important; }
+      .process-card { border-right: none !important; border-bottom: 1px solid rgba(227,33,215,0.15) !important; }
+      .process-card:last-child { border-bottom: none !important; }
+      #home { padding-top: 60px !important; }
+      .scroll-indicator { bottom: 24px; }
+      .cta-section, #contact { padding-top: 8px !important; margin-top: 0 !important; }
+      #active-jobs { padding-bottom: 24px !important; }
+    }
+
+    @keyframes scroll-bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+      60% { transform: translateX(-50%) translateY(10px); opacity: 0.4; }
+    }
+
+    /* ---- Modal ---- */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 9500;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .modal-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      cursor: pointer;
+    }
+    .modal-box {
+      position: relative;
+      background: #FAFAFA;
+      border: 1px solid rgba(227,33,215,0.2);
+      border-radius: 20px;
+      max-width: 680px; width: 100%;
+      max-height: 85vh; overflow-y: auto; overscroll-behavior: contain;
+      padding: 48px;
+      z-index: 1;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.8), 0 0 60px rgba(227,33,215,0.08);
+      animation: modal-in 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes modal-in {
+      from { opacity: 0; transform: scale(0.94) translateY(20px); }
+      to   { opacity: 1; transform: scale(1)    translateY(0); }
+    }
+    .modal-close {
+      position: absolute; top: 20px; right: 20px;
+      width: 36px; height: 36px;
+      background: #F4ECF3;
+      border: 1px solid #F0E6EF;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: #71717A; cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .modal-close:hover { background: rgba(227,33,215,0.15); border-color: rgba(227,33,215,0.4); color: #E321D7; }
+    .modal-close:focus-visible { outline: 2px solid #E321D7; outline-offset: 3px; }
+    .modal-section { margin-top: 28px; padding-top: 24px; border-top: 1px solid #F4ECF3; }
+    .modal-section-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13px; font-weight: 700;
+      color: #E321D7; letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .modal-list { display: flex; flex-direction: column; gap: 11px; list-style: none; }
+    .modal-list li {
+      display: flex; align-items: flex-start; gap: 11px;
+      color: #1A1A1A; font-size: 17px; line-height: 1.65;
+    }
+    .modal-list li::before {
+      content: ''; width: 5px; height: 5px;
+      border-radius: 50%; background: #E321D7;
+      flex-shrink: 0; margin-top: 8px;
+    }
+    @media (max-width: 640px) { .modal-box { padding: 28px 20px; } }
+
+    /* ---- Process Timeline ---- */
+    .ptl-nav {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .ptl-step::after {
+      content: '';
+      position: absolute;
+      top: 39px;
+      left: calc(50% + 39px);
+      right: calc(-50% + 39px);
+      height: 1px;
+      background: rgba(227,33,215,0.2);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ptl-step:last-child::after { display: none; }
+    .ptl-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .ptl-step:focus-visible { outline: none; }
+    .ptl-step:focus-visible .ptl-dot { box-shadow: 0 0 0 3px rgba(227,33,215,0.38); }
+    .ptl-dot {
+      width: 78px; height: 78px;
+      border-radius: 50%;
+      border: 2px solid #E321D7;
+      background: rgba(227,33,215,0.14);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 21px; font-weight: 700;
+      color: #E321D7;
+      transition: background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+      flex-shrink: 0;
+    }
+    .ptl-step-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px; font-weight: 600;
+      color: #1A1A1A;
+      text-align: center;
+      line-height: 1.4;
+      max-width: 160px;
+      transition: color 0.22s ease;
+    }
+
+    .ptl-panel {
+      margin-top: 36px;
+      padding: 32px 40px;
+      background: rgba(0,0,0,0.015);
+      border: 1px solid #F0E6EF;
+      border-radius: 14px;
+      transition: opacity 0.18s ease;
+    }
+    .ptl-panel.ptl-fade { opacity: 0; }
+    .ptl-panel-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 10px; font-weight: 700;
+      color: #E321D7;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .ptl-panel-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 20px; font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #1A1A1A;
+      margin-bottom: 12px;
+    }
+    .ptl-panel-desc {
+      font-size: 16px;
+      color: #71717A;
+      line-height: 1.75;
+    }
+
+    /* ---- Timeline mobile ---- */
+    .ptl-mobile { display: none; flex-direction: column; }
+    .ptl-mobile-item { display: flex; gap: 18px; }
+    .ptl-mobile-left {
+      display: flex; flex-direction: column; align-items: center;
+      flex-shrink: 0; width: 78px;
+    }
+    .ptl-mobile-dot {
+      width: 78px; height: 78px;
+      border-radius: 50%;
+      border: 2px solid #E321D7;
+      background: rgba(227,33,215,0.14);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 21px; font-weight: 700;
+      color: #E321D7;
+      flex-shrink: 0;
+    }
+    .ptl-mobile-line {
+      width: 1px; flex: 1; min-height: 20px;
+      background: rgba(227,33,215,0.15);
+      margin: 5px 0;
+    }
+    .ptl-mobile-item:last-child .ptl-mobile-line { display: none; }
+    .ptl-mobile-content { padding: 6px 0 32px; }
+    .ptl-mobile-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px; font-weight: 700;
+      color: #1A1A1A; letter-spacing: -0.01em; margin-bottom: 8px;
+    }
+    .ptl-mobile-desc { font-size: 14px; color: #71717A; line-height: 1.72; }
+
+    @media (max-width: 768px) {
+      .ptl-nav, .ptl-panel { display: none !important; }
+      .ptl-mobile { display: flex !important; align-items: center !important; text-align: center !important; }
+      .ptl-mobile-item { flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 14px !important; }
+      .ptl-mobile-content { text-align: center !important; padding-bottom: 26px !important; }
+      .ptl-mobile-line { display: none !important; }
+      .ptl-mobile-dot { width: 59px !important; height: 59px !important; font-size: 16px !important; }
+      .ptl-mobile-left { width: 59px !important; }
+      .ptl-mobile-title { font-size: 13px !important; }
+    }
+
+    @media (max-width: 768px) {
+      #services, #solutii {
+        padding-top: 48px !important;
+      }
+    }
+
+    /* ---- Industrii grid ---- */
+    .magenta { color: #E321D7; }
+    .industrii-section { padding: 100px 24px; max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; max-width: 700px; margin: 0 auto; }
+    .section-subtitle { color: #71717A; font-size: 17px; line-height: 1.75; margin: 16px 0 0; }
+    .ind-tier1-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 60px;
+    }
+    .ind-card-tier1 {
+      background: #FFFFFF;
+      border: 0.5px solid #EBD5E9;
+      border-left: 3px solid #E321D7;
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .ind-card-num {
+      font-size: 11px;
+      font-weight: 600;
+      color: #E321D7;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .ind-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1A1A1A;
+      margin: 0 0 16px;
+    }
+    .ind-roles-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .ind-roles-list li {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #71717A;
+      padding: 5px 0;
+      border-bottom: 1px solid #F4ECF3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ind-roles-list li::before {
+      content: "";
+      display: inline-block;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: #E321D7;
+      flex-shrink: 0;
+    }
+    .ind-roles-list li:last-child { border-bottom: none; }
+    @media (max-width: 900px) {
+      .ind-tier1-grid { grid-template-columns: 1fr; }
+    }
+    .job-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 32px; background: rgba(0,0,0,0.02);
+      border: 1px solid #F0E6EF; border-radius: 12px;
+      text-decoration: none; color: inherit; gap: 16px;
+      transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .job-row:hover { background: rgba(227,33,215,0.06); border-color: rgba(227,33,215,0.28); transform: translateY(-2px); }
+    .job-row:active { transform: translateY(0); }
+    .job-row:focus-visible { outline: 2px solid #E321D7; outline-offset: 3px; }
+    @media (max-width: 768px) {
+      #active-jobs { padding-top: 32px !important; }
+      .job-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+        padding: 16px 20px !important;
+      }
+      .job-row > div:first-child { width: 100% !important; }
+      .job-row > div:first-child p { font-size: 16px !important; }
+      .job-row > div:last-child {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        text-align: left !important;
+        flex-shrink: unset !important;
+      }
+      .job-row > div:last-child p { font-size: 12px !important; white-space: normal !important; }
+    }
+
+    /* ---- Footer ---- */
+    .site-footer { background: #FAFAFA; border-top: 1px solid #F0E6EF; padding: 60px 40px 0; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; padding-bottom: 48px; }
+    .footer-logo-img { height: 36px; width: auto; margin-bottom: 16px; display: block; }
+    .footer-tagline { font-size: 13px; color: #71717A; line-height: 1.6; margin: 0 0 20px; max-width: 260px; }
+    .footer-linkedin { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: #71717A; text-decoration: none; transition: color 0.2s; }
+    .footer-linkedin:hover { color: #E321D7; }
+    .footer-col-title { font-size: 11px; font-weight: 600; color: #A1A1AA; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 16px; }
+    .footer-links { list-style: none; padding: 0; margin: 0; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a { font-size: 14px; color: #71717A; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: #E321D7; }
+    .footer-link-magenta { color: #E321D7 !important; }
+    .footer-contact-item { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: #71717A; text-decoration: none; transition: color 0.2s; }
+    .footer-contact-item:hover { color: #E321D7; }
+    .footer-bottom { border-top: 1px solid #F4ECF3; padding: 20px 0; display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-size: 12px; color: #A1A1AA; margin: 0; }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { font-size: 12px; color: #A1A1AA; text-decoration: none; transition: color 0.2s; }
+    .footer-legal a:hover { color: #71717A; }
+
+    /* ---- Hero specializations ---- */
+    .hero-spec-block {
+      margin-top: 32px;
+      text-align: center;
+    }
+    .hero-spec-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(26,26,26,0.65);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin: 0 0 8px;
+    }
+    .hero-spec-items {
+      font-size: 17px;
+      color: rgba(26,26,26,0.78);
+      letter-spacing: 0.01em;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- =================== NAVBAR =================== -->
+<nav id="navbar">
+  <div class="navbar-inner">
+    <!-- LEFT: Logo -->
+    <div class="navbar-left">
+      <a href="#home"><img src="brand_assets/Zebra%20Dark.svg" alt="Zebra People" style="height:70px;width:auto;" /></a>
+    </div>
+
+    <!-- CENTER: All nav links -->
+    <div class="navbar-center hidden md:flex" style="gap:28px;">
+      <a href="#what-we-do" class="nav-link">How We Work</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#industrii" class="nav-link">Expertise</a>
+      <a href="#active-jobs" class="nav-link">Jobs</a>
+      <a href="https://diviziamedicala.ro" target="_blank" rel="noopener" class="nav-link" style="display:inline-flex;align-items:center;gap:5px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:13px;height:13px;border:1px solid rgba(227,33,215,0.45);border-radius:2px;font-size:8px;line-height:1;flex-shrink:0;">↗</span>Divizia Medicală<span style="font-size:9px;font-weight:700;letter-spacing:0.05em;padding:1px 5px;border-radius:3px;background:rgba(227,33,215,0.12);color:#E321D7;border:1px solid rgba(227,33,215,0.3);">NEW</span></a>
+      <a href="#despre-noi" class="nav-link">About us</a>
+    </div>
+
+    <!-- RIGHT: lang toggle -->
+    <div class="navbar-right hidden md:flex">
+      <div class="lang-nav-inner">
+        <a href="index.html" class="lang-top-btn">RO</a>
+        <span class="lang-top-sep">/</span>
+        <span class="lang-top-btn active">EN</span>
+      </div>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button id="menu-toggle" class="md:hidden flex flex-col gap-[5px] p-2 cursor-pointer" style="margin-left:auto;" aria-label="Toggle menu">
+      <span class="block w-6 h-0.5 bg-gray-800 rounded transition-all duration-200" id="bar1"></span>
+      <span class="block w-6 h-0.5 bg-gray-800 rounded transition-all duration-200" id="bar2"></span>
+      <span class="block w-4 h-0.5 bg-gray-800 rounded transition-all duration-200" id="bar3"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mobile-menu">
+  <div class="flex flex-col gap-5" style="padding-top:22px;">
+    <a href="#what-we-do" class="nav-link text-base mobile-close" style="font-size:16px;">How We Work</a>
+    <a href="#services" class="nav-link text-base mobile-close" style="font-size:16px;">Services</a>
+    <a href="#industrii" class="nav-link text-base mobile-close" style="font-size:16px;">Expertise</a>
+    <a href="#active-jobs" class="nav-link text-base mobile-close" style="font-size:16px;">Jobs</a>
+    <a href="https://diviziamedicala.ro" target="_blank" rel="noopener" class="nav-link text-base mobile-close" style="font-size:16px;gap:6px;width:100%;"><span style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border:1px solid rgba(227,33,215,0.45);border-radius:2px;font-size:9px;line-height:1;flex-shrink:0;">↗</span>Divizia Medicală<span style="font-size:9px;font-weight:700;letter-spacing:0.05em;padding:1px 5px;border-radius:3px;background:rgba(227,33,215,0.12);color:#E321D7;border:1px solid rgba(227,33,215,0.3);">NEW</span></a>
+    <a href="#despre-noi" class="nav-link text-base mobile-close" style="font-size:16px;">About us</a>
+    <a href="mailto:office@zebramarket.ro" style="display:block;text-align:center;background:#E321D7;color:#FFFFFF;border-radius:10px;padding:14px 28px;font-weight:600;font-size:16px;text-decoration:none;margin-top:4px;font-family:'Inter',sans-serif;">Contact Us</a>
+    <div style="display:flex;align-items:center;justify-content:center;margin-top:24px;padding-bottom:24px;">
+      <a href="index.html" style="font-size:13px;font-weight:500;color:#A1A1AA;text-decoration:none;letter-spacing:0.04em;">RO</a>
+      <span style="font-size:13px;color:#A1A1AA;margin:0 5px;">/</span>
+      <span style="font-size:13px;font-weight:600;color:#1A1A1A;letter-spacing:0.04em;">EN</span>
+    </div>
+  </div>
+</div>
+
+<!-- =================== HERO =================== -->
+<section id="home" class="relative min-h-screen flex flex-col justify-center overflow-hidden" style="padding-top:100px;">
+  <canvas id="hero-waves-canvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+  <div class="hero-glow" style="width:900px;height:900px;top:-200px;left:-300px;"></div>
+  <div class="hero-glow" style="width:600px;height:600px;bottom:-150px;right:-100px;opacity:0.6;"></div>
+  <div style="position:absolute;top:0;right:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent 0%,rgba(227,33,215,0.25) 40%,rgba(227,33,215,0.25) 60%,transparent 100%);pointer-events:none;"></div>
+
+  <div style="max-width:1280px;margin:0 auto;padding:80px 24px;position:relative;z-index:1;text-align:center;">
+    <div>
+      <h1 class="font-display fade-up" style="font-size:clamp(48px,8vw,92px);font-weight:800;letter-spacing:-0.035em;line-height:1.01;margin-bottom:24px;transition-delay:0.08s;">
+        Behind every successful business are the right <span class="magenta">PEOPLE</span>
+      </h1>
+      <p class="fade-up" style="font-size:20px;color:rgba(26,26,26,0.80);line-height:1.7;max-width:600px;margin:0 auto 40px;transition-delay:0.16s;">We act as an extension of your team and take full ownership of the recruitment process</p>
+
+      <div class="flex flex-wrap gap-4 fade-up" style="transition-delay:0.24s;justify-content:center;">
+        <a href="mailto:office@zebramarket.ro" class="btn-primary" style="font-size:16px;padding:16px 36px;">I want to hire</a>
+        <a href="#joburi-active" class="btn-outline" style="font-size:16px;padding:16px 36px;">Find a Job</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator" style="position:absolute;bottom:36px;left:50%;animation:scroll-bounce 2.5s ease-in-out infinite;display:flex;flex-direction:column;align-items:center;gap:6px;">
+    <span style="font-size:10px;color:#A1A1AA;letter-spacing:0.1em;text-transform:uppercase;font-family:'Inter',sans-serif;">Scroll</span>
+    <svg width="22" height="34" viewBox="0 0 22 34" fill="none" style="color:#A1A1AA;">
+      <rect x="1" y="1" width="20" height="32" rx="10" stroke="currentColor" stroke-width="1.5"/>
+      <rect x="9" y="6" width="4" height="7" rx="2" fill="#E321D7" style="opacity:0.7;"/>
+    </svg>
+  </div>
+</section>
+
+<!-- =================== WHAT WE DO =================== -->
+<section id="what-we-do" style="padding:120px 24px 60px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-10%;left:-5%;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(227,33,215,0.05) 0%,transparent 65%);pointer-events:none;z-index:0;"></div>
+  <div style="max-width:1280px;margin:0 auto;position:relative;z-index:1;">
+
+    <!-- Part 1: Image + Text -->
+    <div class="ce-facem-grid fade-up" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:120px;">
+
+      <!-- Image column -->
+      <div>
+        <img src="brand_assets/puzzle2.png" alt="Zebra People services" style="border-radius:16px;width:100%;object-fit:cover;display:block;" />
+      </div>
+
+      <!-- Text column -->
+      <div>
+        <h2 class="font-display" style="font-size:clamp(28px,3.5vw,44px);font-weight:800;letter-spacing:-0.03em;line-height:1.1;margin-bottom:28px;">
+          We act as an extension of your team
+        </h2>
+        <p style="color:#71717A;font-size:19px;font-weight:400;line-height:1.7;">
+          We take full ownership of the recruitment process, from defining the profile to signing the offer, so your team can focus its time on growing the business.
+        </p>
+      </div>
+    </div>
+
+    <!-- Part 2: Process -->
+    <div class="fade-up" style="transition-delay:0.1s;">
+      <div style="text-align:center;margin-bottom:72px;">
+        <h2 class="font-display" style="font-size:clamp(28px,4vw,46px);font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin-bottom:16px;">
+          How we turn recruitment into a predictable process
+        </h2>
+      </div>
+
+      <!-- Process Timeline -->
+      <div>
+        <!-- Desktop: horizontal tab nav -->
+        <div class="ptl-nav" role="tablist" aria-label="Recruitment process steps">
+          <button class="ptl-step ptl-active" role="tab" aria-selected="true" tabindex="0" data-step="0">
+            <span class="ptl-dot">1</span>
+            <span class="ptl-step-title">We define success</span>
+          </button>
+          <button class="ptl-step" role="tab" aria-selected="false" tabindex="-1" data-step="1">
+            <span class="ptl-dot">2</span>
+            <span class="ptl-step-title">We build the ideal profile</span>
+          </button>
+          <button class="ptl-step" role="tab" aria-selected="false" tabindex="-1" data-step="2">
+            <span class="ptl-dot">3</span>
+            <span class="ptl-step-title">We research and map the market</span>
+          </button>
+          <button class="ptl-step" role="tab" aria-selected="false" tabindex="-1" data-step="3">
+            <span class="ptl-dot">4</span>
+            <span class="ptl-step-title">We activate the search</span>
+          </button>
+          <button class="ptl-step" role="tab" aria-selected="false" tabindex="-1" data-step="4">
+            <span class="ptl-dot">5</span>
+            <span class="ptl-step-title">We select and evaluate</span>
+          </button>
+          <button class="ptl-step" role="tab" aria-selected="false" tabindex="-1" data-step="5">
+            <span class="ptl-dot">6</span>
+            <span class="ptl-step-title">We coordinate the selection and offer process</span>
+          </button>
+        </div>
+
+        <!-- Mobile: vertical stacked timeline -->
+        <div class="ptl-mobile">
+          <div class="ptl-mobile-item">
+            <div class="ptl-mobile-left"><div class="ptl-mobile-dot">1</div><div class="ptl-mobile-line"></div></div>
+            <div class="ptl-mobile-content">
+              <div class="ptl-mobile-title">We define success</div>
+            </div>
+          </div>
+          <div class="ptl-mobile-item">
+            <div class="ptl-mobile-left"><div class="ptl-mobile-dot">2</div><div class="ptl-mobile-line"></div></div>
+            <div class="ptl-mobile-content">
+              <div class="ptl-mobile-title">We build the ideal profile</div>
+            </div>
+          </div>
+          <div class="ptl-mobile-item">
+            <div class="ptl-mobile-left"><div class="ptl-mobile-dot">3</div><div class="ptl-mobile-line"></div></div>
+            <div class="ptl-mobile-content">
+              <div class="ptl-mobile-title">We research and map the market</div>
+            </div>
+          </div>
+          <div class="ptl-mobile-item">
+            <div class="ptl-mobile-left"><div class="ptl-mobile-dot">4</div><div class="ptl-mobile-line"></div></div>
+            <div class="ptl-mobile-content">
+              <div class="ptl-mobile-title">We activate the search</div>
+            </div>
+          </div>
+          <div class="ptl-mobile-item">
+            <div class="ptl-mobile-left"><div class="ptl-mobile-dot">5</div><div class="ptl-mobile-line"></div></div>
+            <div class="ptl-mobile-content">
+              <div class="ptl-mobile-title">We select and evaluate</div>
+            </div>
+          </div>
+          <div class="ptl-mobile-item">
+            <div class="ptl-mobile-left"><div class="ptl-mobile-dot">6</div><div class="ptl-mobile-line"></div></div>
+            <div class="ptl-mobile-content">
+              <div class="ptl-mobile-title">We coordinate the selection and offer process</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =================== SERVICES =================== -->
+<section id="services" style="padding:120px 24px 60px;">
+  <div style="max-width:1280px;margin:0 auto;">
+
+    <hr style="border:none;border-top:1px solid #F0E6EF;max-width:900px;margin:0 auto 32px;">
+
+    <!-- BLOCK 1: Section header -->
+    <div style="text-align:center;max-width:760px;margin:0 auto 64px;" class="fade-up">
+      <h2 class="font-display" style="font-size:clamp(28px,4vw,46px);font-weight:700;letter-spacing:-0.025em;line-height:1.08;margin-bottom:20px;white-space:nowrap;">
+        Flexible recruitment solutions
+      </h2>
+      <p style="color:#71717A;font-size:18px;line-height:1.75;">Whether you need to fill a single role or are looking for a long-term partner, we choose the right model together.</p>
+    </div>
+
+    <!-- BLOCK 2: Two cards -->
+    <div class="grid md:grid-cols-2 gap-6" style="margin-bottom:64px;align-items:stretch;">
+      <!-- Card 1: Individual project -->
+      <div class="card fade-up" style="transition-delay:0.08s;display:flex;flex-direction:column;padding:2rem;">
+        <h3 class="font-display" style="font-size:22px;font-weight:700;letter-spacing:-0.02em;margin-bottom:16px;">Individual project</h3>
+        <p style="color:#71717A;font-size:16px;line-height:1.7;margin-bottom:0;min-height:80px;">Do you recruit occasionally and need support filling a position? We take over the full process, from defining the profile to signing the offer.</p>
+        <p style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#E321D7;margin-top:1.5rem;margin-bottom:12px;">Ideal if:</p>
+        <ul style="list-style:none;padding:0;margin:0 0 36px 0;display:flex;flex-direction:column;">
+          <li style="display:block;padding-left:1.2em;text-indent:-1.2em;color:#1A1A1A;font-size:15px;line-height:1.6;margin-bottom:8px;"><span class="dot" style="display:inline-block;vertical-align:middle;margin-right:10px;"></span>You have one or a few open roles</li>
+          <li style="display:block;padding-left:1.2em;text-indent:-1.2em;color:#1A1A1A;font-size:15px;line-height:1.6;margin-bottom:8px;"><span class="dot" style="display:inline-block;vertical-align:middle;margin-right:10px;"></span>You recruit occasionally</li>
+          <li style="display:block;padding-left:1.2em;text-indent:-1.2em;color:#1A1A1A;font-size:15px;line-height:1.6;margin-bottom:8px;"><span class="dot" style="display:inline-block;vertical-align:middle;margin-right:10px;"></span>You pay only on successful hire</li>
+        </ul>
+        <a href="#" onclick="return false;" class="btn-primary modal-trigger" data-modal="modal-success-fee" style="font-size:16px;padding:12px 24px;align-self:flex-start;margin-top:auto;">
+          Discover the service
+        </a>
+      </div>
+
+      <!-- Card 2: Monthly retainer -->
+      <div class="card fade-up" style="transition-delay:0.16s;display:flex;flex-direction:column;border-color:rgba(227,33,215,0.35);background:linear-gradient(140deg,rgba(227,33,215,0.07) 0%,#FFFFFF 55%);position:relative;padding:2rem;">
+        <span style="position:absolute;top:1rem;right:1rem;background:rgba(227,33,215,0.14);color:#E321D7;font-size:10px;font-weight:800;padding:4px 10px;border-radius:5px;border:1px solid rgba(227,33,215,0.3);letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap;">Monthly retainer</span>
+        <h3 class="font-display" style="font-size:22px;font-weight:700;letter-spacing:-0.02em;margin-bottom:16px;padding-right:180px;">External recruitment department</h3>
+        <p style="color:#71717A;font-size:16px;line-height:1.7;margin-bottom:0;min-height:80px;">You recruit constantly and need a partner to take over the recruitment process and function as an extension of your team.</p>
+        <p style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#E321D7;margin-top:1.5rem;margin-bottom:12px;">Ideal if:</p>
+        <ul style="list-style:none;padding:0;margin:0 0 36px 0;display:flex;flex-direction:column;">
+          <li style="display:block;padding-left:1.2em;text-indent:-1.2em;color:#1A1A1A;font-size:15px;line-height:1.6;margin-bottom:8px;"><span class="dot" style="display:inline-block;vertical-align:middle;margin-right:10px;"></span>You recruit constantly</li>
+          <li style="display:block;padding-left:1.2em;text-indent:-1.2em;color:#1A1A1A;font-size:15px;line-height:1.6;margin-bottom:8px;"><span class="dot" style="display:inline-block;vertical-align:middle;margin-right:10px;"></span>You have multiple open roles simultaneously</li>
+          <li style="display:block;padding-left:1.2em;text-indent:-1.2em;color:#1A1A1A;font-size:15px;line-height:1.6;margin-bottom:8px;"><span class="dot" style="display:inline-block;vertical-align:middle;margin-right:10px;"></span>You don't have dedicated internal recruitment resources</li>
+        </ul>
+        <a href="#" onclick="return false;" class="btn-primary modal-trigger" data-modal="modal-subscription" style="font-size:16px;padding:12px 24px;align-self:flex-start;margin-top:auto;">
+          Discover the service
+        </a>
+      </div>
+    </div>
+
+    <!-- BLOCK 5: Final CTA -->
+    <div class="fade-up" style="margin-top:64px;text-align:center;padding:48px 0;">
+      <h3 class="font-display" style="font-size:clamp(22px,3vw,32px);font-weight:700;letter-spacing:-0.02em;margin-bottom:28px;">Not sure which model fits you?</h3>
+      <a href="mailto:office@zebramarket.ro" class="btn-primary" style="font-size:16px;padding:14px 32px;display:inline-flex;">
+        Schedule a call
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M12 4H6M12 4v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<div style="width:100%;margin:0;padding:0;line-height:0;">
+  <img src="brand_assets/banner bun.png" alt="" style="width:100%;display:block;object-fit:cover;max-height:400px;" />
+</div>
+
+<!-- =================== INDUSTRIES =================== -->
+<section id="industrii" class="industrii-section">
+  <div class="section-header">
+    <h2 class="font-display" style="font-size:clamp(28px,4vw,46px);font-weight:700;letter-spacing:-0.025em;line-height:1.1;">
+      Our Recruitment <span class="magenta">Expertise</span>
+    </h2>
+  </div>
+  <div class="ind-tier1-grid">
+
+    <div class="ind-card-tier1">
+      <span class="ind-card-num">1</span>
+      <h3 class="ind-card-title">Engineering & Production</h3>
+      <ul class="ind-roles-list">
+        <li>Automation Engineer</li>
+        <li>Production Engineer</li>
+        <li>Field Service Engineer</li>
+        <li>Electrical Engineer</li>
+        <li>Maintenance Engineer</li>
+        <li>Project Engineer</li>
+      </ul>
+    </div>
+
+    <div class="ind-card-tier1">
+      <span class="ind-card-num">2</span>
+      <h3 class="ind-card-title">Finance & Accounting</h3>
+      <ul class="ind-roles-list">
+        <li>CFO</li>
+        <li>Financial Controller</li>
+        <li>Accounting Manager</li>
+        <li>Chief Accountant</li>
+        <li>Finance Manager</li>
+        <li>Payroll Specialist</li>
+      </ul>
+    </div>
+
+    <div class="ind-card-tier1">
+      <span class="ind-card-num">3</span>
+      <h3 class="ind-card-title">Executive Search</h3>
+      <ul class="ind-roles-list">
+        <li>CEO</li>
+        <li>COO</li>
+        <li>CFO</li>
+        <li>CTO</li>
+        <li>VP</li>
+        <li>Executive Director</li>
+      </ul>
+    </div>
+
+
+    <div class="ind-card-tier1">
+      <span class="ind-card-num">4</span>
+      <h3 class="ind-card-title">Technology</h3>
+      <ul class="ind-roles-list">
+        <li>Software Engineer</li>
+        <li>AI Engineer</li>
+        <li>DevOps Engineer</li>
+        <li>QA Engineer</li>
+        <li>Infrastructure Specialist</li>
+        <li>SAP Consultant</li>
+      </ul>
+    </div>
+
+    <div class="ind-card-tier1">
+      <span class="ind-card-num">5</span>
+      <h3 class="ind-card-title">Energy & Renewables</h3>
+      <ul class="ind-roles-list">
+        <li>Solar Project Manager</li>
+        <li>PV Installation Engineer</li>
+        <li>Wind Energy Engineer</li>
+        <li>HSE Specialist</li>
+        <li>ESG Specialist</li>
+        <li>Technical Sales Engineer</li>
+      </ul>
+    </div>
+
+    <div class="ind-card-tier1">
+      <span class="ind-card-num">6</span>
+      <h3 class="ind-card-title">BPO & Multilingual Support</h3>
+      <ul class="ind-roles-list">
+        <li>Customer Support Specialist (EN/DE/FR/IT)</li>
+        <li>Customer Success Manager</li>
+        <li>Back Office Specialist</li>
+        <li>Team Leader / Supervisor</li>
+        <li>Quality Assurance Specialist</li>
+        <li>Account Manager (multilingual)</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div style="width:100%;max-width:900px;margin:0 auto;padding:0 24px;">
+  <hr style="border:none;border-top:1px solid #F0E6EF;margin:0;" />
+</div>
+
+<!-- =================== ACTIVE JOBS =================== -->
+<section id="active-jobs" style="padding:120px 24px;position:relative;overflow:hidden;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;max-width:600px;margin:0 auto 64px;" class="fade-up">
+      <h2 class="font-display" style="font-size:clamp(28px,4vw,46px);font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin-bottom:16px;">
+        Active Jobs
+      </h2>
+      <p style="color:#71717A;font-size:17px;line-height:1.75;">
+        Open positions we are currently recruiting for.
+      </p>
+    </div>
+
+    <div style="max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:8px;" class="fade-up">
+
+      <a href="en-job-sales-manager.html" class="job-row">
+        <div style="flex:1;min-width:0;">
+          <p class="font-display" style="font-size:18px;font-weight:700;letter-spacing:-0.02em;color:#1A1A1A;margin:0 0 4px;">Sales Manager</p>
+        </div>
+        <div style="flex-shrink:0;text-align:right;display:flex;align-items:center;gap:16px;">
+          <p style="font-size:12px;color:#71717A;letter-spacing:0.06em;font-weight:600;text-transform:uppercase;margin:0;white-space:nowrap;">On-site &nbsp;·&nbsp; Pipera, București</p>
+          <span style="font-size:20px;color:#E321D7;line-height:1;">↗</span>
+        </div>
+      </a>
+
+      <a href="en-job-chief-accountant.html" class="job-row">
+        <div style="flex:1;min-width:0;">
+          <p class="font-display" style="font-size:18px;font-weight:700;letter-spacing:-0.02em;color:#1A1A1A;margin:0 0 4px;">Chief Accountant</p>
+        </div>
+        <div style="flex-shrink:0;text-align:right;display:flex;align-items:center;gap:16px;">
+          <p style="font-size:12px;color:#71717A;letter-spacing:0.06em;font-weight:600;text-transform:uppercase;margin:0;white-space:nowrap;">Hybrid &nbsp;·&nbsp; București</p>
+          <span style="font-size:20px;color:#E321D7;line-height:1;">↗</span>
+        </div>
+      </a>
+
+      <a href="en-job-cto.html" class="job-row">
+        <div style="flex:1;min-width:0;">
+          <p class="font-display" style="font-size:18px;font-weight:700;letter-spacing:-0.02em;color:#1A1A1A;margin:0 0 4px;">CTO</p>
+        </div>
+        <div style="flex-shrink:0;text-align:right;display:flex;align-items:center;gap:16px;">
+          <p style="font-size:12px;color:#71717A;letter-spacing:0.06em;font-weight:600;text-transform:uppercase;margin:0;white-space:nowrap;">On-site &nbsp;·&nbsp; București</p>
+          <span style="font-size:20px;color:#E321D7;line-height:1;">↗</span>
+        </div>
+      </a>
+
+      <a href="en-job-production-manager.html" class="job-row">
+        <div style="flex:1;min-width:0;">
+          <p class="font-display" style="font-size:18px;font-weight:700;letter-spacing:-0.02em;color:#1A1A1A;margin:0 0 4px;">Production Manager</p>
+        </div>
+        <div style="flex-shrink:0;text-align:right;display:flex;align-items:center;gap:16px;">
+          <p style="font-size:12px;color:#71717A;letter-spacing:0.06em;font-weight:600;text-transform:uppercase;margin:0;white-space:nowrap;">On-site &nbsp;·&nbsp; Tecuci</p>
+          <span style="font-size:20px;color:#E321D7;line-height:1;">↗</span>
+        </div>
+      </a>
+
+      <a href="en-job-ecommerce-manager.html" class="job-row">
+        <div style="flex:1;min-width:0;">
+          <p class="font-display" style="font-size:18px;font-weight:700;letter-spacing:-0.02em;color:#1A1A1A;margin:0 0 4px;">E-commerce Manager</p>
+        </div>
+        <div style="flex-shrink:0;text-align:right;display:flex;align-items:center;gap:16px;">
+          <p style="font-size:12px;color:#71717A;letter-spacing:0.06em;font-weight:600;text-transform:uppercase;margin:0;white-space:nowrap;">On-site &nbsp;·&nbsp; București</p>
+          <span style="font-size:20px;color:#E321D7;line-height:1;">↗</span>
+        </div>
+      </a>
+
+      <a href="en-job-marketing-specialist.html" class="job-row">
+        <div style="flex:1;min-width:0;">
+          <p class="font-display" style="font-size:18px;font-weight:700;letter-spacing:-0.02em;color:#1A1A1A;margin:0 0 4px;">Marketing Specialist</p>
+        </div>
+        <div style="flex-shrink:0;text-align:right;display:flex;align-items:center;gap:16px;">
+          <p style="font-size:12px;color:#71717A;letter-spacing:0.06em;font-weight:600;text-transform:uppercase;margin:0;white-space:nowrap;">Hybrid &nbsp;·&nbsp; București</p>
+          <span style="font-size:20px;color:#E321D7;line-height:1;">↗</span>
+        </div>
+      </a>
+
+      <a href="en-job-retail-operations.html" class="job-row">
+        <div style="flex:1;min-width:0;">
+          <p class="font-display" style="font-size:18px;font-weight:700;letter-spacing:-0.02em;color:#1A1A1A;margin:0 0 4px;">Retail Operations Coordinator</p>
+        </div>
+        <div style="flex-shrink:0;text-align:right;display:flex;align-items:center;gap:16px;">
+          <p style="font-size:12px;color:#71717A;letter-spacing:0.06em;font-weight:600;text-transform:uppercase;margin:0;white-space:nowrap;">On-site &nbsp;·&nbsp; București</p>
+          <span style="font-size:20px;color:#E321D7;line-height:1;">↗</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- =================== CONTACT =================== -->
+<section id="contact" class="cta-section">
+  <div class="cta-banner">
+    <h2 class="cta-banner-title">Looking for great people for your team?</h2>
+    <div class="cta-banner-divider"></div>
+    <a href="mailto:office@zebramarket.ro" class="btn-cta-primary">Schedule a call ↗</a>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+
+      <div class="footer-col footer-brand">
+        <img src="brand_assets/Zebra Dark.svg" alt="Zebra People" class="footer-logo-img">
+        <p class="footer-tagline">Behind every successful business,<br>there's a great recruiter.</p>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-title">Navigation</p>
+        <ul class="footer-links">
+          <li><a href="#what-we-do">How We Work</a></li>
+          <li><a href="#services">Solutions</a></li>
+          <li><a href="#industrii">Hire</a></li>
+          <li><a href="#active-jobs">Active Jobs</a></li>
+          <li><a href="https://diviziamedicala.ro" target="_blank" class="footer-link-magenta">↗ Divizia Medicală</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-title">Contact</p>
+        <a href="mailto:office@zebramarket.ro" class="footer-contact-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          office@zebramarket.ro
+        </a>
+        <div class="footer-contact-item" style="margin-top: 10px; align-items: flex-start;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-top:2px; flex-shrink:0;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          <span>Global City, Șoseaua București Nord 10, București</span>
+        </div>
+        <a href="https://www.linkedin.com/in/cristian-t-11b901b3/" target="_blank" class="footer-contact-item" style="margin-top: 10px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7M7 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Zebra People · All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="politica.html">Privacy Policy</a>
+        <a href="termeni.html">Terms & Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  let open = false;
+  toggle.addEventListener('click', () => {
+    open = !open;
+    menu.classList.toggle('open', open);
+    document.getElementById('bar3').style.width = open ? '24px' : '16px';
+    document.getElementById('bar1').style.transform = open ? 'translateY(6px) rotate(45deg)' : '';
+    document.getElementById('bar2').style.opacity = open ? '0' : '1';
+    document.getElementById('bar3').style.transform = open ? 'translateY(-6px) rotate(-45deg)' : '';
+  });
+  document.querySelectorAll('.mobile-close').forEach(el => {
+    el.addEventListener('click', () => {
+      open = false; menu.classList.remove('open');
+      document.getElementById('bar1').style.transform = '';
+      document.getElementById('bar2').style.opacity = '1';
+      document.getElementById('bar3').style.transform = '';
+      document.getElementById('bar3').style.width = '16px';
+    });
+  });
+
+  const fadeObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+  setTimeout(() => { document.querySelectorAll('#home .fade-up').forEach(el => el.classList.add('visible')); }, 120);
+
+  // Preview mode: reveal all sections at once
+  if (location.search.includes('preview')) {
+    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+  }
+
+  function runCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1800; const start = performance.now();
+    function tick(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(ease * target) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const cntObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { runCounter(e.target); cntObs.unobserve(e.target); } });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.counter-val').forEach(el => cntObs.observe(el));
+</script>
+
+<script>
+(function () {
+  var canvas = document.getElementById('hero-waves-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var hero = canvas.parentElement;
+  var mouse = { x: 0, y: 0 };
+  var target = { x: 0, y: 0 };
+  var time = 0;
+  var raf;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var MOUSE_INFL = reduced ? 8 : 55;
+  var INFL_RADIUS = reduced ? 160 : 300;
+  var SMOOTH = reduced ? 0.04 : 0.1;
+
+  var waves = [
+    { offset: 0,                amplitude: 65, freq: 0.003,  r: 227, g: 33,  b: 215, op: 0.17 },
+    { offset: Math.PI * 0.5,   amplitude: 85, freq: 0.0026, r: 255, g: 100, b: 240, op: 0.11 },
+    { offset: Math.PI,          amplitude: 55, freq: 0.0034, r: 200, g: 20,  b: 200, op: 0.10 },
+    { offset: Math.PI * 1.5,   amplitude: 75, freq: 0.0022, r: 255, g: 150, b: 255, op: 0.07 },
+    { offset: Math.PI * 2,     amplitude: 50, freq: 0.004,  r: 180, g: 10,  b: 180, op: 0.08 },
+  ];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = hero.offsetHeight;
+    var cx = canvas.width / 2, cy = canvas.height / 2;
+    mouse.x = cx; mouse.y = cy;
+    target.x = cx; target.y = cy;
+  }
+
+  function drawWave(w) {
+    var cy = canvas.height * 0.56;
+    ctx.save();
+    ctx.beginPath();
+    for (var x = 0; x <= canvas.width; x += 4) {
+      var dx = x - mouse.x, dy = cy - mouse.y;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      var infl = Math.max(0, 1 - dist / INFL_RADIUS);
+      var me = infl * MOUSE_INFL * Math.sin(time * 0.001 + x * 0.01 + w.offset);
+      var y = cy
+        + Math.sin(x * w.freq + time * 0.002 + w.offset) * w.amplitude
+        + Math.sin(x * w.freq * 0.4 + time * 0.003) * (w.amplitude * 0.45)
+        + me;
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.lineWidth = 2;
+    ctx.globalAlpha = w.op;
+    ctx.strokeStyle = 'rgb(' + w.r + ',' + w.g + ',' + w.b + ')';
+    ctx.shadowBlur = 28;
+    ctx.shadowColor = 'rgba(227,33,215,0.55)';
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function tick() {
+    time++;
+    mouse.x += (target.x - mouse.x) * SMOOTH;
+    mouse.y += (target.y - mouse.y) * SMOOTH;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    waves.forEach(drawWave);
+    raf = requestAnimationFrame(tick);
+  }
+
+  window.addEventListener('resize', resize);
+  hero.addEventListener('mousemove', function (e) {
+    var r = hero.getBoundingClientRect();
+    target.x = e.clientX - r.left;
+    target.y = e.clientY - r.top;
+  });
+  hero.addEventListener('mouseleave', function () {
+    target.x = canvas.width / 2;
+    target.y = canvas.height * 0.56;
+  });
+
+  resize();
+  tick();
+})();
+</script>
+
+<!-- =================== MODALS =================== -->
+
+<!-- Modal: Success Fee -->
+<div id="modal-success-fee" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="modal-sf-title">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <button class="modal-close" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div style="padding-right:20px;">
+      <div class="icon-chip" style="width:52px;height:52px;border-radius:14px;margin-bottom:20px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M7.83 4.7a3.42 3.42 0 001.95-.81 3.42 3.42 0 014.44 0 3.42 3.42 0 001.95.81 3.42 3.42 0 013.14 3.14 3.42 3.42 0 00.81 1.95 3.42 3.42 0 010 4.44 3.42 3.42 0 00-.81 1.95 3.42 3.42 0 01-3.14 3.14 3.42 3.42 0 00-1.95.81 3.42 3.42 0 01-4.44 0 3.42 3.42 0 00-1.95-.81A3.42 3.42 0 014.7 16.2a3.42 3.42 0 00-.81-1.95 3.42 3.42 0 010-4.44A3.42 3.42 0 004.7 7.83 3.42 3.42 0 017.83 4.7z" stroke="#E321D7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2 id="modal-sf-title" class="font-display" style="font-size:clamp(22px,3vw,28px);font-weight:800;letter-spacing:-0.025em;margin-bottom:16px;">Success Fee / Headhunting</h2>
+      <p style="color:#1A1A1A;font-size:18px;line-height:1.75;">Specialised recruitment for hard-to-fill roles, management positions and niche-skill professionals. We identify, approach and evaluate relevant candidates — including professionals who are not actively on the market and do not apply to job postings.</p>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-title">How it works</div>
+      <ul class="modal-list">
+        <li>We analyse the role, company context and ideal candidate profile.</li>
+        <li>We conduct talent mapping and identify relevant candidates in the market.</li>
+        <li>We approach candidates directly and validate their experience, motivation and salary expectations.</li>
+        <li>We present only candidates who are interested and aligned with the role requirements.</li>
+        <li>We manage the entire process through to offer acceptance and candidate onboarding.</li>
+      </ul>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-title">When it's the right fit</div>
+      <ul class="modal-list">
+        <li>For management or leadership roles.</li>
+        <li>For specialists difficult to find through conventional recruitment methods.</li>
+        <li>For confidential positions.</li>
+        <li>For companies without sufficient internal time or resources.</li>
+        <li>For roles where speed and shortlist quality are critical.</li>
+      </ul>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-title">Benefits</div>
+      <ul class="modal-list">
+        <li>Access to candidates who are not actively job-seeking.</li>
+        <li>Structured and predictable recruitment process.</li>
+        <li>Reduced time investment from your internal team.</li>
+        <li>Preliminary candidate evaluation and interest validation.</li>
+        <li>Access to relevant market intelligence and salary benchmarks.</li>
+      </ul>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-title">Engagement terms</div>
+      <ul class="modal-list">
+        <li>Success fee: 10% of the hired candidate's gross annual salary.</li>
+        <li>Retainer: 15–25% of the estimated invoice value, paid at project launch.</li>
+        <li>Balance payment: due on the candidate's first day of employment.</li>
+        <li>Replacement guarantee in accordance with agreed contractual terms.</li>
+        <li>Final payment is made exclusively upon a successful hire.</li>
+      </ul>
+    </div>
+    <div style="margin-top:36px;padding-top:28px;border-top:1px solid #F0E6EF;">
+      <button class="btn-primary modal-cta" style="font-size:15px;padding:14px 28px;">Let's Talk</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Recruitment Subscription -->
+<div id="modal-subscription" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="modal-sub-title">
+  <div class="modal-backdrop"></div>
+  <div class="modal-box">
+    <button class="modal-close" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div style="padding-right:20px;">
+      <div class="icon-chip" style="width:52px;height:52px;border-radius:14px;background:rgba(227,33,215,0.16);margin-bottom:20px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="#E321D7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2 id="modal-sub-title" class="font-display" style="font-size:clamp(22px,3vw,28px);font-weight:800;letter-spacing:-0.025em;margin-bottom:16px;">Recruitment Subscription</h2>
+      <p style="color:#1A1A1A;font-size:18px;line-height:1.75;">A service designed for companies that hire continuously and need a partner that functions as an extension of their internal team. Instead of paying per hire, you get ongoing recruitment support through a fixed monthly retainer, with clear objectives, priorities and KPIs.</p>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-title">How it works</div>
+      <ul class="modal-list">
+        <li>We take over part or all of your recruitment process.</li>
+        <li>We define target profiles and candidate attraction strategy.</li>
+        <li>We build and manage talent pipelines.</li>
+        <li>We contact, evaluate and coordinate candidates throughout the process.</li>
+        <li>We provide regular reports and full visibility on progress.</li>
+      </ul>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-title">What's included</div>
+      <ul class="modal-list">
+        <li>Profile definition and job posting creation.</li>
+        <li>Talent sourcing and active candidate outreach.</li>
+        <li>Screening and initial interviews.</li>
+        <li>Interview scheduling and coordination.</li>
+        <li>Salary benchmarking and market intelligence.</li>
+        <li>Offer formulation support and end-to-end process management.</li>
+      </ul>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-title">When it's the right fit</div>
+      <ul class="modal-list">
+        <li>The company has multiple open roles simultaneously.</li>
+        <li>Recruitment volume is consistent.</li>
+        <li>The internal team lacks sufficient capacity.</li>
+        <li>Cost predictability is a priority.</li>
+        <li>The company is looking for a long-term partner, not just one-off support.</li>
+      </ul>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-title">Benefits</div>
+      <ul class="modal-list">
+        <li>Predictable monthly cost.</li>
+        <li>Continuous access to recruitment expertise.</li>
+        <li>Reduced time-to-fill.</li>
+        <li>Steady pipeline of qualified candidates.</li>
+        <li>Flexibility and scalability to match business needs.</li>
+      </ul>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-title">Engagement example</div>
+      <ul class="modal-list">
+        <li>Fixed monthly retainer.</li>
+        <li>Recommended minimum engagement: 3 months.</li>
+        <li>Number of active roles agreed together with the client.</li>
+        <li>Regular reporting and KPIs agreed from the start of the engagement.</li>
+      </ul>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-title">Example KPIs</div>
+      <ul class="modal-list">
+        <li>Number of candidates presented.</li>
+        <li>Number of interviews scheduled.</li>
+        <li>Time-to-shortlist / Time-to-hire.</li>
+        <li>Number of hires made.</li>
+        <li>Offer acceptance rate.</li>
+      </ul>
+    </div>
+    <div style="margin-top:36px;padding-top:28px;border-top:1px solid #F0E6EF;">
+      <button class="btn-primary modal-cta" style="font-size:15px;padding:14px 28px;">Let's Talk</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var ptlBtns = document.querySelectorAll('.ptl-step');
+  if (!ptlBtns.length) return;
+  function ptlActivate(idx) {
+    ptlBtns.forEach(function (b, i) {
+      var on = i === idx;
+      b.classList.toggle('ptl-active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+      b.tabIndex = on ? 0 : -1;
+    });
+  }
+  ptlBtns.forEach(function (btn, i) {
+    btn.addEventListener('click', function () { ptlActivate(i); });
+    btn.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { var n = Math.min(i + 1, ptlBtns.length - 1); ptlActivate(n); ptlBtns[n].focus(); }
+      if (e.key === 'ArrowLeft')  { var n = Math.max(i - 1, 0); ptlActivate(n); ptlBtns[n].focus(); }
+      if (e.key === 'Home')       { ptlActivate(0); ptlBtns[0].focus(); }
+      if (e.key === 'End')        { var n = ptlBtns.length - 1; ptlActivate(n); ptlBtns[n].focus(); }
+    });
+  });
+})();
+</script>
+
+<script>
+(function () {
+  function openModal(id) {
+    var m = document.getElementById(id);
+    if (!m) return;
+    m.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(overlay) {
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.modal-trigger').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      openModal(el.dataset.modal);
+    });
+  });
+  document.querySelectorAll('.modal-backdrop').forEach(function (el) {
+    el.addEventListener('click', function () {
+      closeModal(el.closest('.modal-overlay'));
+    });
+  });
+  document.querySelectorAll('.modal-close').forEach(function (el) {
+    el.addEventListener('click', function () {
+      closeModal(el.closest('.modal-overlay'));
+    });
+  });
+  document.querySelectorAll('.modal-cta').forEach(function (el) {
+    el.addEventListener('click', function () {
+      var overlay = el.closest('.modal-overlay');
+      closeModal(overlay);
+      setTimeout(function () {
+        var t = document.querySelector('#contact');
+        if (t) t.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay').forEach(function (m) {
+        if (m.style.display !== 'none') closeModal(m);
+      });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
