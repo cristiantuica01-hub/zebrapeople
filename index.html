@@ -623,13 +623,15 @@
       display: none; flex-direction: column; width: 100%;
       position: relative; padding: 8px 0 0;
     }
-    .ptl-vtl::before {
-      content: ''; position: absolute;
+    .ptl-vtl-line {
+      position: absolute;
       left: 50%; top: 32px; bottom: 28px;
-      border-left: 1.5px dashed #E321D7;
-      transform: translateX(-0.75px);
+      width: 2px;
+      border-left: 2px dashed #E321D7;
+      transform: translateX(-1px);
+      pointer-events: none;
     }
-    .ptl-vtl-step { display: flex; align-items: center; width: 100%; margin-bottom: 39px; }
+    .ptl-vtl-step { display: flex; align-items: center; width: 100%; margin-bottom: 39px; position: relative; z-index: 1; }
     .ptl-vtl-half { width: 50%; display: flex; align-items: center; flex-shrink: 0; }
     .ptl-vtl-lh { justify-content: flex-end; }
     .ptl-vtl-rh { justify-content: flex-start; }
@@ -640,7 +642,7 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 16px; font-weight: 700; color: #E321D7; flex-shrink: 0;
     }
-    .ptl-vtl-conn { width: 20px; height: 1.5px; background: #E321D7; flex-shrink: 0; }
+    .ptl-vtl-conn { width: 30px; height: 2px; background: #E321D7; flex-shrink: 0; }
     .ptl-vtl-gap { width: 8px; flex-shrink: 0; }
     .ptl-vtl-lbl {
       font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600;
@@ -942,6 +944,7 @@
 
         <!-- Mobile: vertical alternating timeline -->
         <div class="ptl-vtl">
+          <div class="ptl-vtl-line"></div>
           <div class="ptl-vtl-step">
             <div class="ptl-vtl-half ptl-vtl-lh">
               <div class="ptl-vtl-lbl">Definim succesul</div>
