@@ -613,15 +613,28 @@
     }
     .ptl-mobile-desc { font-size: 14px; color: #71717A; line-height: 1.72; }
 
+    /* ---- Timeline snake grid (mobile) ---- */
+    .ptl-snake { display: none; flex-direction: column; width: 100%; }
+    .ptl-snake-row { display: flex; align-items: flex-start; width: 100%; }
+    .ptl-snake-cell { flex: 1; display: flex; flex-direction: column; align-items: center; min-width: 0; }
+    .ptl-snake-arrow-h { width: 30px; flex-shrink: 0; display: flex; justify-content: center; padding-top: 17px; }
+    .ptl-snake-turn-row { display: flex; justify-content: flex-end; padding-right: calc((100% - 60px) / 6 - 22px); }
+    .ptl-snake-dot-m {
+      width: 56px; height: 56px; border-radius: 50%;
+      border: 2px solid #E321D7; background: rgba(227,33,215,0.10);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px; font-weight: 700; color: #E321D7; flex-shrink: 0;
+    }
+    .ptl-snake-lbl {
+      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600;
+      color: #1A1A1A; text-align: center; line-height: 1.3; margin-top: 7px;
+    }
+
     @media (max-width: 768px) {
       .ptl-nav, .ptl-panel { display: none !important; }
-      .ptl-mobile { display: flex !important; align-items: center !important; text-align: center !important; }
-      .ptl-mobile-item { flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 14px !important; }
-      .ptl-mobile-content { text-align: center !important; padding-bottom: 26px !important; }
-      .ptl-mobile-line { display: none !important; }
-      .ptl-mobile-dot { width: 59px !important; height: 59px !important; font-size: 16px !important; }
-      .ptl-mobile-left { width: 59px !important; }
-      .ptl-mobile-title { font-size: 13px !important; }
+      .ptl-mobile { display: none !important; }
+      .ptl-snake { display: flex !important; }
     }
 
     @media (max-width: 768px) {
@@ -910,42 +923,44 @@
           </button>
         </div>
 
-        <!-- Mobile: vertical stacked timeline -->
-        <div class="ptl-mobile">
-          <div class="ptl-mobile-item">
-            <div class="ptl-mobile-left"><div class="ptl-mobile-dot">1</div><div class="ptl-mobile-line"></div></div>
-            <div class="ptl-mobile-content">
-              <div class="ptl-mobile-title">Definim succesul</div>
+        <!-- Mobile: snake grid timeline -->
+        <div class="ptl-snake">
+          <!-- Row 1: 1 → 2 → 3 -->
+          <div class="ptl-snake-row">
+            <div class="ptl-snake-cell">
+              <div class="ptl-snake-dot-m">1</div>
+              <div class="ptl-snake-lbl">Definim succesul</div>
+            </div>
+            <div class="ptl-snake-arrow-h"><svg width="30" height="20" viewBox="0 0 30 20" fill="none"><path d="M2 10 Q15 3 28 10" stroke="#E321D7" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/><path d="M22 5.5 L28 10 L22 14.5" stroke="#E321D7" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="ptl-snake-cell">
+              <div class="ptl-snake-dot-m">2</div>
+              <div class="ptl-snake-lbl">Construim profilul ideal</div>
+            </div>
+            <div class="ptl-snake-arrow-h"><svg width="30" height="20" viewBox="0 0 30 20" fill="none"><path d="M2 10 Q15 3 28 10" stroke="#E321D7" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/><path d="M22 5.5 L28 10 L22 14.5" stroke="#E321D7" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="ptl-snake-cell">
+              <div class="ptl-snake-dot-m">3</div>
+              <div class="ptl-snake-lbl">Cercetăm și mapăm piața</div>
             </div>
           </div>
-          <div class="ptl-mobile-item">
-            <div class="ptl-mobile-left"><div class="ptl-mobile-dot">2</div><div class="ptl-mobile-line"></div></div>
-            <div class="ptl-mobile-content">
-              <div class="ptl-mobile-title">Construim profilul ideal</div>
-            </div>
+          <!-- Turn: curved arrow from step 3 down to step 4 (aligned to col 3) -->
+          <div class="ptl-snake-turn-row">
+            <svg width="44" height="54" viewBox="0 0 44 54" fill="none"><path d="M22 2 Q42 10 42 27 Q42 44 22 52" stroke="#E321D7" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/><path d="M28 46 L22 52 L16 46" stroke="#E321D7" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
-          <div class="ptl-mobile-item">
-            <div class="ptl-mobile-left"><div class="ptl-mobile-dot">3</div><div class="ptl-mobile-line"></div></div>
-            <div class="ptl-mobile-content">
-              <div class="ptl-mobile-title">Cercetăm și mapăm piața</div>
+          <!-- Row 2: 6 ← 5 ← 4 (snake; 4 rightmost, 6 leftmost) -->
+          <div class="ptl-snake-row">
+            <div class="ptl-snake-cell">
+              <div class="ptl-snake-dot-m">6</div>
+              <div class="ptl-snake-lbl">Coordonăm procesul de selecție și ofertare</div>
             </div>
-          </div>
-          <div class="ptl-mobile-item">
-            <div class="ptl-mobile-left"><div class="ptl-mobile-dot">4</div><div class="ptl-mobile-line"></div></div>
-            <div class="ptl-mobile-content">
-              <div class="ptl-mobile-title">Activăm căutarea</div>
+            <div class="ptl-snake-arrow-h"><svg width="30" height="20" viewBox="0 0 30 20" fill="none"><path d="M28 10 Q15 3 2 10" stroke="#E321D7" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/><path d="M8 5.5 L2 10 L8 14.5" stroke="#E321D7" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="ptl-snake-cell">
+              <div class="ptl-snake-dot-m">5</div>
+              <div class="ptl-snake-lbl">Selectăm și evaluăm</div>
             </div>
-          </div>
-          <div class="ptl-mobile-item">
-            <div class="ptl-mobile-left"><div class="ptl-mobile-dot">5</div><div class="ptl-mobile-line"></div></div>
-            <div class="ptl-mobile-content">
-              <div class="ptl-mobile-title">Selectăm și evaluăm</div>
-            </div>
-          </div>
-          <div class="ptl-mobile-item">
-            <div class="ptl-mobile-left"><div class="ptl-mobile-dot">6</div><div class="ptl-mobile-line"></div></div>
-            <div class="ptl-mobile-content">
-              <div class="ptl-mobile-title">Coordonăm procesul de selecție și ofertare</div>
+            <div class="ptl-snake-arrow-h"><svg width="30" height="20" viewBox="0 0 30 20" fill="none"><path d="M28 10 Q15 3 2 10" stroke="#E321D7" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/><path d="M8 5.5 L2 10 L8 14.5" stroke="#E321D7" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="ptl-snake-cell">
+              <div class="ptl-snake-dot-m">4</div>
+              <div class="ptl-snake-lbl">Activăm căutarea</div>
             </div>
           </div>
         </div>
