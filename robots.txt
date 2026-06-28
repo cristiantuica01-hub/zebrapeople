@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zebrapeople.ro/sitemap.xml
