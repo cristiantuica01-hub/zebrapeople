@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Zebra People — Romanian recruitment agency. We connect ambitious businesses with exceptional talent. Success Fee & Subscription Recruitment.">
   <title>Zebra People — Recruitment that makes a difference</title>
   <link rel="icon" href="brand_assets/Favicon.svg" type="image/svg+xml">
@@ -29,6 +29,7 @@
   </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       background-color: #FAFAFA;
@@ -73,9 +74,11 @@
     .lang-top-sep { font-size: 10px; color: #A1A1AA; margin: 0 1px; }
 
     #navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+      margin: 0;
       padding: 16px 24px;
-      background: rgba(255,255,255,0.97);
+      padding-top: env(safe-area-inset-top, 0px);
+      background: #FFFFFF;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid #F0E6EF;
@@ -257,7 +260,7 @@
       .cta-section, #contact { padding-top: 8px !important; margin-top: 0 !important; }
       #active-jobs { padding-bottom: 24px !important; }
       html, body { margin-top: 0 !important; padding-top: 0 !important; }
-      #navbar { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; margin: 0 !important; padding-top: 0 !important; background: #FFFFFF !important; }
+      #navbar { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; margin: 0 !important; padding-top: env(safe-area-inset-top, 0px) !important; background: #FFFFFF !important; }
     }
 
     @keyframes scroll-bounce {
