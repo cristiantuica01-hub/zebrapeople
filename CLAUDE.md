@@ -1,5 +1,21 @@
 # CLAUDE.md — Frontend Website Rules
 
+## Scope of this folder — check BEFORE starting work
+
+This folder is **exclusively** for web development: HTML/CSS, publishing job pages on the site,
+Vercel deploys. Nothing else.
+
+Everything else about recruitment — **writing or rewriting JDs**, role calibration, client
+strategy, sourcing plans, market research, intake notes, candidate lists — lives in
+`Dropbox/Mac/Desktop/Recruitment OS Operator/`, under `roluri/<client>/<rol>.md`.
+
+**If asked to do recruitment work here — writing a JD, thinking through a role, strategy —
+stop and tell Cristian to open the Operator OS folder instead.** Do not create JD or
+strategy files in this repo.
+
+The split: the JD is written in Operator OS; publishing it as a page happens here. Two steps,
+two folders. Take the finished JD text as input, do not author it here.
+
 ## Always Do First
 - **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
 
