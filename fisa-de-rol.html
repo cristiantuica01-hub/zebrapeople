@@ -6,13 +6,15 @@
 <title>Fisa de rol · Zebra People</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--magenta:#E321D7;--magenta-text:#C417B9;--ink:#111;--muted:#6b6b6b;
+:root{--magenta:#E321D7;--magenta-text:#C417B9;--magenta-press:#C417B9;--ink:#111;--muted:#6b6b6b;
 --line:#d8d8d8;--ess:#FBE7F8;--bg:#EDEDEA;--card:#fff;
 --dark:#0A0A0A;--dark-2:#141414;
 --sans:'Inter',-apple-system,"Helvetica Neue",Arial,sans-serif;
---display:'Plus Jakarta Sans',-apple-system,"Helvetica Neue",Arial,sans-serif}
+--display:'Plus Jakarta Sans',-apple-system,"Helvetica Neue",Arial,sans-serif;
+--mono:'JetBrains Mono','SF Mono',ui-monospace,monospace;
+--example:#7E7E78}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);
 font:16px/1.7 var(--sans);padding:0 0 120px;-webkit-font-smoothing:antialiased}
@@ -25,51 +27,27 @@ border-bottom:1px solid var(--line);padding:12px 0}
 .meta{font-size:13px;color:var(--muted);text-align:right;line-height:1.4}
 .meta b{display:block;color:var(--ink);font-size:14px;font-family:var(--display);font-weight:700}
 .track{height:3px;background:var(--line);margin-top:12px;border-radius:2px;overflow:hidden}
-.track i{display:block;height:100%;width:0;border-radius:2px;
-background:linear-gradient(90deg,#C417B9,#E321D7 60%,#ff7cf8);
-box-shadow:0 0 8px rgba(227,33,215,.5);transition:width .3s ease}
+.track i{display:block;height:100%;width:0;background:var(--magenta);
+transition:width .3s ease}
 
-/* ---- hero executive: fundal inchis, continut centrat ---- */
-.herowrap{position:relative;background:var(--dark);overflow:hidden;
-margin-bottom:30px;isolation:isolate}
-.herowrap::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-background:
- radial-gradient(760px 420px at 50% -12%, rgba(227,33,215,.30) 0%, transparent 68%),
- radial-gradient(520px 340px at 8% 108%, rgba(255,124,248,.14) 0%, transparent 70%),
- radial-gradient(560px 360px at 96% 6%, rgba(107,60,181,.16) 0%, transparent 72%),
- linear-gradient(175deg, var(--dark-2) 0%, var(--dark) 60%)}
-/* granulatie fina pentru adancime */
-.herowrap::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-opacity:.05;mix-blend-mode:overlay;
-background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
-.herowrap .wrap{position:relative;z-index:2}
-
-header.hero{padding:76px 0 66px;text-align:center}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;
-font-family:var(--display);font-size:11.5px;font-weight:700;
-letter-spacing:.15em;text-transform:uppercase;color:#F5B8F0;
-background:rgba(227,33,215,.11);border:1px solid rgba(227,33,215,.34);
-padding:7px 15px;border-radius:100px;margin:0 0 24px}
-.eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--magenta);
-box-shadow:0 0 9px 1px rgba(227,33,215,.85)}
+/* ---- cover: tema light, conform document-a4-print.md ----
+   fara gradiente, fara umbre, fara textura. adancimea vine din linii. */
+.herowrap{background:var(--card);border-bottom:1px solid var(--line);margin-bottom:30px}
+header.hero{padding:72px 0 60px;text-align:center}
+.eyebrow{display:block;font-family:var(--mono);font-size:12px;font-weight:500;
+letter-spacing:.18em;text-transform:uppercase;color:var(--magenta-text);margin:0 0 26px}
 header.hero h1{font-family:var(--display);font-size:52px;font-weight:800;
-line-height:1.05;letter-spacing:-.035em;margin:0 0 20px;color:#fff}
-header.hero h1 em{font-style:normal;
-background:linear-gradient(120deg,#E321D7 0%,#ff7cf8 52%,#E321D7 100%);
--webkit-background-clip:text;background-clip:text;color:transparent}
-header.hero .tag{font-size:17.5px;line-height:1.6;color:#B9B9C0;
-margin:0 auto;max-width:520px;font-weight:300}
-header.hero .rule{width:52px;height:2px;margin:30px auto 0;border-radius:2px;
-background:linear-gradient(90deg,transparent,var(--magenta),transparent)}
+line-height:1.02;letter-spacing:-.02em;margin:0 0 18px;color:var(--ink)}
+header.hero .tag{font-size:17px;line-height:1.5;color:#6b6b6b;font-weight:400;
+margin:0 auto;max-width:none}
+header.hero .rule{width:44px;height:2px;margin:34px auto 0;background:var(--magenta)}
 .lead{background:var(--card);border:1px solid var(--line);padding:26px 28px;
-margin-bottom:26px;border-radius:6px;
-box-shadow:0 1px 2px rgba(17,17,17,.04),0 8px 24px -12px rgba(227,33,215,.10)}
+margin-bottom:26px;border-radius:10px}
 .lead p{margin:0 0 12px} .lead p:last-child{margin:0}
 .lead .demo{background:var(--ess);padding:12px 14px;margin:14px 0}
 
 .card{background:var(--card);border:1px solid var(--line);padding:30px 32px;
-margin-bottom:20px;border-radius:6px;
-box-shadow:0 1px 2px rgba(17,17,17,.04),0 8px 24px -12px rgba(227,33,215,.10)}
+margin-bottom:20px;border-radius:10px}
 .card h2{font-family:var(--display);font-weight:700;font-size:20px;margin:0 0 2px;
 color:var(--magenta-text);letter-spacing:-.015em}
 .card h2 .num{color:var(--ink)}
@@ -85,8 +63,8 @@ margin-bottom:7px;letter-spacing:-.01em}
 .f input,.f textarea{width:100%;font-family:inherit;font-size:15px;line-height:1.5;color:var(--ink);
 padding:10px 12px;border:1px solid #c9c9c9;background:#fff;border-radius:2px}
 .f textarea{resize:vertical;min-height:64px}
-.f input:focus,.f textarea:focus{outline:0;border-color:var(--magenta);
-box-shadow:0 0 0 3px rgba(227,33,215,.12)}
+.f input:focus,.f textarea:focus{outline:2px solid var(--magenta);outline-offset:2px;
+border-color:var(--magenta)}
 .f input::placeholder,.f textarea::placeholder{color:#a5a5a0;font-style:italic}
 .f .err{display:none;font-size:13px;color:#C0135C;margin-top:5px}
 .f.miss input,.f.miss textarea{border-color:#C0135C;background:#FFF6FA}
@@ -97,14 +75,11 @@ font-size:14px;color:#444;margin-top:24px}
 
 .submit{width:100%;padding:19px;font-family:var(--display);font-weight:700;
 font-size:16.5px;letter-spacing:-.01em;color:#fff;border:0;cursor:pointer;
-border-radius:5px;background:linear-gradient(135deg,#E321D7 0%,#C417B9 100%);
-box-shadow:0 2px 6px rgba(227,33,215,.26),0 12px 30px -10px rgba(227,33,215,.46);
-transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .18s ease,opacity .18s ease}
-.submit:hover{transform:translateY(-2px);
-box-shadow:0 4px 10px rgba(227,33,215,.30),0 18px 40px -12px rgba(227,33,215,.55)}
-.submit:active{transform:translateY(0);
-box-shadow:0 2px 6px rgba(227,33,215,.26)}
-.submit:focus-visible{outline:3px solid rgba(227,33,215,.42);outline-offset:3px}
+border-radius:8px;background:var(--magenta);
+transition:background-color .12s ease}
+.submit:hover{background:#F04AE6}
+.submit:active{background:var(--magenta-press)}
+.submit:focus-visible{outline:2px solid var(--magenta);outline-offset:2px}
 .foot{text-align:center;color:var(--muted);font-size:13px;margin-top:22px;line-height:1.7}
 
 #done{display:none;background:var(--card);border:1px solid var(--line);
@@ -115,7 +90,7 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
  .card{padding:20px}
  header.hero{padding:52px 0 46px}
  header.hero h1{font-size:34px}
- header.hero .tag{font-size:16px}
+ header.hero .tag{font-size:15px}
  .eyebrow{font-size:10.5px;padding:6px 13px;margin-bottom:20px}
  .f.ess{margin-left:-8px;margin-right:-8px;padding:12px}
  .meta{font-size:12px}}
@@ -133,8 +108,8 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
 <div class="herowrap">
   <div class="wrap">
     <header class="hero">
-      <span class="eyebrow"><span class="dot"></span>Zebra People &middot; Document de lucru</span>
-      <h1>Fisa de&nbsp;<em>rol</em></h1>
+      <span class="eyebrow">Document de lucru</span>
+      <h1>Fisa de rol</h1>
       <p class="tag">Intelegem business-ul. Analizam piata. Gasim oamenii potriviti.</p>
       <div class="rule"></div>
     </header>
