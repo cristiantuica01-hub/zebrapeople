@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /fisa-de-rol
-Disallow: /fisa-de-rol.html
 
 Sitemap: https://zebrapeople.ro/sitemap.xml
