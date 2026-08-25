@@ -122,6 +122,17 @@ transition:background-color .12s ease,color .12s ease}
 .lng.en{color:var(--magenta-text);border-color:var(--magenta)}
 .voice-on .f input[type=text]{padding-right:96px}
 .voice-on .f textarea{padding-right:96px}
+/* ---- progres salvat local ---- */
+.saved{display:none;align-items:center;gap:8px;margin:0 0 22px;padding:11px 14px;
+background:var(--card);border:2px solid var(--ink);border-radius:4px;
+font-size:13.5px;color:#444;line-height:1.4}
+.saved.show{display:flex}
+.saved b{font-weight:700}
+.saved .x{margin-left:auto;flex-shrink:0;font:inherit;font-size:12.5px;color:var(--muted);
+background:none;border:0;padding:4px 6px;cursor:pointer;text-decoration:underline}
+.saved .x:hover{color:var(--magenta-text)}
+.saved .x:focus-visible{outline:2px solid var(--magenta);outline-offset:2px}
+@media(max-width:640px){.saved{flex-wrap:wrap}.saved .x{margin-left:0}}
 .mic-note{display:none;font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.45}
 .voice-on .mic-note.show{display:block}
 
@@ -684,6 +695,61 @@ letter-spacing:-.02em}
     window.addEventListener('beforeunload', opreste);
   })();
 
+  /* ---- progres salvat in browserul clientului ----
+     nimic nu pleaca de aici pana la trimitere; se sterge dupa ce fisa a fost trimisa */
+  var STORE='zp-fisa-progres';
+  var trimis=false;
+
+  function scrieProgres(){
+    if(trimis) return;
+    try{
+      var d={};
+      fields.forEach(function(f){ if(f.value.trim()!=='') d[f.id]=f.value; });
+      if(Object.keys(d).length) localStorage.setItem(STORE, JSON.stringify(d));
+      else localStorage.removeItem(STORE);
+    }catch(e){}
+  }
+
+  function stergeProgres(){ trimis=true; try{ localStorage.removeItem(STORE); }catch(e){} }
+
+  function bannerProgres(cate){
+    var el=document.createElement('div');
+    el.className='saved show';
+    el.innerHTML='<span><b>Am pastrat ce ati completat anterior</b> &mdash; '+cate+
+      (cate===1?' raspuns restaurat':' raspunsuri restaurate')+
+      '. Progresul se salveaza automat, doar in acest browser.</span>'+
+      '<button type="button" class="x">Sterge si incep de la zero</button>';
+    var lead=document.querySelector('.lead');
+    if(lead && lead.parentNode) lead.parentNode.insertBefore(el, lead.nextSibling);
+    el.querySelector('.x').addEventListener('click', function(){
+      stergeProgres(); trimis=false;
+      fields.forEach(function(f){ f.value=''; });
+      el.remove(); tick(); seen();
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  }
+
+  // la deschidere: restaurez ce exista
+  try{
+    var brut=localStorage.getItem(STORE);
+    if(brut){
+      var d=JSON.parse(brut), n=0;
+      fields.forEach(function(f){
+        if(typeof d[f.id]==='string' && d[f.id]!==''){ f.value=d[f.id]; n++; }
+      });
+      if(n) { salvat=n; bannerProgres(n); }
+      else stergeProgres();
+    }
+  }catch(e){ stergeProgres(); }
+
+  // salvez pe masura ce completeaza, fara sa scriu la fiecare tasta
+  var amanat=null;
+  form.addEventListener('input', function(){
+    clearTimeout(amanat);
+    amanat=setTimeout(scrieProgres, 600);
+  });
+  window.addEventListener('beforeunload', scrieProgres);
+
   window.addEventListener('scroll',seen,{passive:true});
   tick(); seen();
 
@@ -705,6 +771,7 @@ letter-spacing:-.02em}
     fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
       .then(function(r){
         if(r.ok){
+          stergeProgres();
           form.style.display='none';
           var lead=document.querySelector('.lead'); if(lead) lead.style.display='none';
           var hero=document.querySelector('.herowrap'); if(hero) hero.style.display='none';
