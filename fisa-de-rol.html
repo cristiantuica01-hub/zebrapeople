@@ -111,9 +111,17 @@ color:var(--ink);transition:background-color .12s ease,color .12s ease}
 border-radius:7px;animation:pulse 1.2s ease-out infinite}
 @keyframes pulse{0%{opacity:.65;transform:scale(1)}100%{opacity:0;transform:scale(1.18)}}
 @media(prefers-reduced-motion:reduce){.mic.rec::after{animation:none;opacity:.5}}
-/* loc pentru buton, ca textul sa nu treaca pe sub el */
-.voice-on .f input[type=text]{padding-right:50px}
-.voice-on .f textarea{padding-right:50px}
+.lng{position:absolute;right:48px;top:8px;height:34px;padding:0 9px;display:none;
+align-items:center;justify-content:center;font-family:var(--mono);font-size:10.5px;
+font-weight:500;letter-spacing:.1em;background:#fff;border:2px solid var(--ink);
+border-radius:4px;color:var(--muted);cursor:pointer;
+transition:background-color .12s ease,color .12s ease}
+.voice-on .lng{display:flex}
+.lng:hover{background:var(--ess);color:var(--ink)}
+.lng:focus-visible{outline:2px solid var(--magenta);outline-offset:2px}
+.lng.en{color:var(--magenta-text);border-color:var(--magenta)}
+.voice-on .f input[type=text]{padding-right:96px}
+.voice-on .f textarea{padding-right:96px}
 .mic-note{display:none;font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.45}
 .voice-on .mic-note.show{display:block}
 
@@ -189,7 +197,7 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
   <p><strong>Ce facem cu raspunsurile.</strong><br>Transformam raspunsurile in criterii de evaluare, intrebari de interviu si strategie de cautare.</p>
   <p><strong>Ce primiti inapoi.</strong><br>Veti primi o analiza clara a rolului: ce am inteles, unde vedem riscuri, ce anticipam ca va fi dificil si cum arata piata pentru profilul cerut. Daca exista zone care merita clarificate inainte de inceperea cautarii, vi le semnalam.</p>
   <div class="demo"><strong>Campurile marcate, ca acest paragraf, sunt esentiale pentru a incepe cautarea.</strong><br>Daca un raspuns nu este clar inca, il putem discuta impreuna.</div>
-  <p class="dictare" style="display:none"><strong>Puteti dicta raspunsurile.</strong><br>Fiecare camp are un buton de microfon in dreapta. Apasati-l, vorbiti, apoi apasati din nou pentru a opri.</p>
+  <p class="dictare" style="display:none"><strong>Puteti dicta raspunsurile, in limba romana.</strong><br>Fiecare camp are un buton de microfon in dreapta. Apasati-l, vorbiti, apoi apasati din nou pentru a opri. Pentru denumiri de roluri sau raspunsuri in engleza, apasati butonul <strong>RO</strong> de langa microfon si treceti pe <strong>EN</strong>.</p>
   <p><strong>Daca nu aveti un raspuns acum, lasati intrebarea goala.</strong><br>O zona neclarificata astazi este informatie utila: stim de unde incepem discutia. Aceeasi neclaritate descoperita mai tarziu in proces poate costa timp, candidati si credibilitate in piata.</p>
 </div>
 
@@ -578,6 +586,30 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
       f.parentNode.insertBefore(box, f);
       box.appendChild(f);
 
+      var lng = document.createElement('button');
+      lng.type = 'button';
+      lng.className = 'lng';
+      lng.textContent = 'RO';
+      lng.title = 'Limba dictarii: romana. Apasati pentru engleza.';
+      lng.setAttribute('aria-label','Limba dictarii: romana');
+      box.appendChild(lng);
+
+      lng.addEventListener('click', function(){
+        var en = lng.classList.toggle('en');
+        lng.textContent = en ? 'EN' : 'RO';
+        lng.title = en ? 'Limba dictarii: engleza. Apasati pentru romana.'
+                       : 'Limba dictarii: romana. Apasati pentru engleza.';
+        lng.setAttribute('aria-label','Limba dictarii: '+(en?'engleza':'romana'));
+        try{ localStorage.setItem('zp-lng-'+f.id, en?'en':'ro'); }catch(e){}
+      });
+
+      // limba retinuta de la vizita anterioara
+      try{
+        if(localStorage.getItem('zp-lng-'+f.id)==='en'){
+          lng.classList.add('en'); lng.textContent='EN';
+        }
+      }catch(e){}
+
       var btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'mic';
@@ -597,7 +629,7 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
         opreste();
 
         rec = new SR();
-        rec.lang = 'ro-RO';
+        rec.lang = lng.classList.contains('en') ? 'en-US' : 'ro-RO';
         rec.continuous = true;
         rec.interimResults = true;
         activ = rec;
