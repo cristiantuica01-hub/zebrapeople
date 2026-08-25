@@ -96,6 +96,27 @@ padding:11px 13px;border:2px solid var(--ink);background:#fff;border-radius:3px}
 border-color:var(--magenta)}
 .f input::placeholder,.f textarea::placeholder{color:#a5a5a0;font-style:italic}
 .f .err{display:none;font-size:13px;color:#C0135C;margin-top:5px}
+/* ---- dictare vocala ---- */
+.f .box{position:relative}
+.mic{position:absolute;right:8px;top:8px;width:34px;height:34px;padding:0;
+display:none;align-items:center;justify-content:center;
+background:#fff;border:2px solid var(--ink);border-radius:4px;cursor:pointer;
+color:var(--ink);transition:background-color .12s ease,color .12s ease}
+.mic svg{width:16px;height:16px;display:block;pointer-events:none}
+.voice-on .mic{display:flex}
+.mic:hover{background:var(--ess)}
+.mic:focus-visible{outline:2px solid var(--magenta);outline-offset:2px}
+.mic.rec{background:var(--magenta);border-color:var(--magenta);color:#fff}
+.mic.rec::after{content:"";position:absolute;inset:-5px;border:2px solid var(--magenta);
+border-radius:7px;animation:pulse 1.2s ease-out infinite}
+@keyframes pulse{0%{opacity:.65;transform:scale(1)}100%{opacity:0;transform:scale(1.18)}}
+@media(prefers-reduced-motion:reduce){.mic.rec::after{animation:none;opacity:.5}}
+/* loc pentru buton, ca textul sa nu treaca pe sub el */
+.voice-on .f input[type=text]{padding-right:50px}
+.voice-on .f textarea{padding-right:50px}
+.mic-note{display:none;font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.45}
+.voice-on .mic-note.show{display:block}
+
 .f.miss input,.f.miss textarea{border-color:#C0135C;background:#FFF6FA}
 .f.miss .err{display:block}
 
@@ -168,6 +189,7 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
   <p><strong>Ce facem cu raspunsurile.</strong><br>Transformam raspunsurile in criterii de evaluare, intrebari de interviu si strategie de cautare.</p>
   <p><strong>Ce primiti inapoi.</strong><br>Veti primi o analiza clara a rolului: ce am inteles, unde vedem riscuri, ce anticipam ca va fi dificil si cum arata piata pentru profilul cerut. Daca exista zone care merita clarificate inainte de inceperea cautarii, vi le semnalam.</p>
   <div class="demo"><strong>Campurile marcate, ca acest paragraf, sunt esentiale pentru a incepe cautarea.</strong><br>Daca un raspuns nu este clar inca, il putem discuta impreuna.</div>
+  <p class="dictare" style="display:none"><strong>Puteti dicta raspunsurile.</strong><br>Fiecare camp are un buton de microfon in dreapta. Apasati-l, vorbiti, apoi apasati din nou pentru a opri.</p>
   <p><strong>Daca nu aveti un raspuns acum, lasati intrebarea goala.</strong><br>O zona neclarificata astazi este informatie utila: stim de unde incepem discutia. Aceeasi neclaritate descoperita mai tarziu in proces poate costa timp, candidati si credibilitate in piata.</p>
 </div>
 
@@ -529,6 +551,108 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
       var w=f.closest('.f'); if(w && f.value.trim()) w.classList.remove('miss');
     });
   });
+  /* ---- dictare vocala (Web Speech API) ----
+     butoanele apar doar daca browserul chiar suporta recunoasterea */
+  (function(){
+    var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if(!SR) return;
+    document.body.classList.add('voice-on');
+    var mentiune=document.querySelector('.dictare');
+    if(mentiune) mentiune.style.display='';
+
+    var MIC = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+      + 'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+      + '<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>'
+      + '<path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg>';
+
+    var activ = null;
+
+    function opreste(){ if(activ){ try{activ.stop()}catch(e){} activ=null; } }
+
+    fields.forEach(function(f){
+      var wrap = f.closest('.f'); if(!wrap) return;
+
+      // invelis pentru pozitionarea butonului
+      var box = document.createElement('div');
+      box.className = 'box';
+      f.parentNode.insertBefore(box, f);
+      box.appendChild(f);
+
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'mic';
+      btn.innerHTML = MIC;
+      btn.title = 'Dicteaza raspunsul';
+      btn.setAttribute('aria-label','Dicteaza raspunsul');
+      box.appendChild(btn);
+
+      var nota = document.createElement('span');
+      nota.className = 'mic-note';
+      wrap.appendChild(nota);
+
+      var rec = null;
+
+      btn.addEventListener('click', function(){
+        if(rec){ opreste(); return; }
+        opreste();
+
+        rec = new SR();
+        rec.lang = 'ro-RO';
+        rec.continuous = true;
+        rec.interimResults = true;
+        activ = rec;
+
+        var initial = f.value, final = '';
+
+        rec.onstart = function(){
+          btn.classList.add('rec');
+          btn.setAttribute('aria-label','Opreste dictarea');
+          nota.textContent = 'Va ascultam. Apasati din nou pentru a opri.';
+          nota.classList.add('show');
+        };
+
+        rec.onresult = function(e){
+          var interim = '';
+          for(var i=e.resultIndex; i<e.results.length; i++){
+            var t = e.results[i][0].transcript;
+            if(e.results[i].isFinal) final += t; else interim += t;
+          }
+          var adaugat = (final + interim).trim();
+          f.value = initial ? (initial.replace(/\s+$/,'') + ' ' + adaugat) : adaugat;
+          f.dispatchEvent(new Event('input',{bubbles:true}));
+        };
+
+        rec.onerror = function(e){
+          nota.textContent = e.error === 'not-allowed'
+            ? 'Accesul la microfon a fost blocat. Activati-l din setarile browserului.'
+            : (e.error === 'no-speech' ? 'Nu am detectat vorbire. Incercati din nou.'
+                                       : 'Dictarea nu a putut porni. Puteti scrie raspunsul.');
+          nota.classList.add('show');
+        };
+
+        rec.onend = function(){
+          btn.classList.remove('rec');
+          btn.setAttribute('aria-label','Dicteaza raspunsul');
+          if(!/blocat|detectat|nu a putut/.test(nota.textContent)){
+            nota.classList.remove('show'); nota.textContent='';
+          }
+          rec = null; if(activ===rec) activ=null;
+          tick();
+        };
+
+        try { rec.start(); }
+        catch(err){
+          nota.textContent = 'Dictarea nu a putut porni. Puteti scrie raspunsul.';
+          nota.classList.add('show');
+          rec = null;
+        }
+      });
+    });
+
+    // o singura dictare activa
+    window.addEventListener('beforeunload', opreste);
+  })();
+
   window.addEventListener('scroll',seen,{passive:true});
   tick(); seen();
 
