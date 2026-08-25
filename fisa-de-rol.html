@@ -37,7 +37,7 @@ transition:width .3s ease}
 
 /* ---- cover: tema light, conform document-a4-print.md ----
    fara gradiente, fara umbre, fara textura. adancimea vine din linii. */
-.herowrap{background:var(--magenta);border-bottom:2px solid var(--ink);margin-bottom:30px}
+.herowrap{background:var(--card);border-bottom:2px solid var(--ink);margin-bottom:30px}
 /* ---- cuprins lateral: structura vizibila, fara efecte ---- */
 .toc{position:sticky;top:118px;float:left;width:212px;margin-left:-250px;z-index:15}
 .toc-in{display:block}
@@ -57,14 +57,15 @@ transition:color .12s ease,border-color .12s ease}
 .toc-c b{display:block;color:var(--ink);font-size:13px;font-family:var(--display)}
 /* sub 1180px nu mai incape langa continut */
 @media(max-width:1180px){.toc{display:none}}
-header.hero{padding:72px 0 60px;text-align:center}
+header.hero{padding:88px 0 74px;text-align:center}
 .eyebrow{display:block;font-family:var(--mono);font-size:12px;font-weight:500;
 letter-spacing:.18em;text-transform:uppercase;color:#fff;margin:0 0 26px}
-header.hero h1{font-family:var(--display);font-size:54px;font-weight:800;
-line-height:1.02;letter-spacing:-.025em;margin:0 0 18px;color:#fff;text-transform:uppercase}
-header.hero .tag{font-size:17px;line-height:1.5;color:rgba(255,255,255,.92);font-weight:500;
-margin:0 auto;max-width:none}
-header.hero .rule{width:44px;height:3px;margin:34px auto 0;background:#fff}
+header.hero h1{font-family:var(--display);font-size:56px;font-weight:800;
+line-height:1.05;letter-spacing:-.025em;margin:0 0 26px;color:var(--ink)}
+header.hero h1 .hl{color:var(--magenta)}
+header.hero .tag{font-family:var(--display);font-size:19px;line-height:1.4;
+color:var(--ink);font-weight:700;margin:0 auto;max-width:none;letter-spacing:-.005em}
+header.hero .rule{width:44px;height:3px;margin:32px auto 0;background:var(--magenta)}
 .lead{background:var(--card);border:2px solid var(--ink);padding:28px 30px;
 margin-bottom:22px;border-radius:4px}
 .lead p{margin:0 0 16px} .lead p:last-child{margin:0}
@@ -117,8 +118,9 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
 @media(max-width:640px){
  .card{padding:20px}
  header.hero{padding:52px 0 46px}
- header.hero h1{font-size:34px}
- header.hero .tag{font-size:15px}
+ header.hero{padding:56px 0 48px}
+ header.hero h1{font-size:34px;margin-bottom:20px}
+ header.hero .tag{font-size:16px}
  .eyebrow{font-size:10.5px;padding:6px 13px;margin-bottom:20px}
  .f.ess{margin-left:-8px;margin-right:-8px;padding:12px}
  .meta{font-size:12px}
@@ -137,8 +139,8 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
 <div class="herowrap">
   <div class="wrap">
     <header class="hero">
-      <h1>Fisa de rol</h1>
-      <p class="tag">Intelegem business-ul. Analizam piata. Gasim oamenii potriviti.</p>
+      <h1>Hiring starts with <span class="hl">clarity.</span></h1>
+      <p class="tag">White-collar &amp; Executive Search</p>
       <div class="rule"></div>
     </header>
   </div>
