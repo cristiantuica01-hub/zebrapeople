@@ -607,15 +607,7 @@ letter-spacing:-.02em}
         lng.title = en ? 'Limba dictarii: engleza. Apasati pentru romana.'
                        : 'Limba dictarii: romana. Apasati pentru engleza.';
         lng.setAttribute('aria-label','Limba dictarii: '+(en?'engleza':'romana'));
-        try{ localStorage.setItem('zp-lng-'+f.id, en?'en':'ro'); }catch(e){}
       });
-
-      // limba retinuta de la vizita anterioara
-      try{
-        if(localStorage.getItem('zp-lng-'+f.id)==='en'){
-          lng.classList.add('en'); lng.textContent='EN';
-        }
-      }catch(e){}
 
       var btn = document.createElement('button');
       btn.type = 'button';
