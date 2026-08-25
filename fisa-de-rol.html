@@ -19,6 +19,7 @@
 --mono:'JetBrains Mono','SF Mono',ui-monospace,monospace;
 --example:#7E7E78}
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);
 font:16px/1.7 var(--sans);padding:0 0 120px;-webkit-font-smoothing:antialiased}
 .wrap{max-width:820px;margin:0 auto;padding:0 20px}
@@ -36,6 +37,24 @@ transition:width .3s ease}
 /* ---- cover: tema light, conform document-a4-print.md ----
    fara gradiente, fara umbre, fara textura. adancimea vine din linii. */
 .herowrap{background:var(--card);border-bottom:1px solid var(--line);margin-bottom:30px}
+/* ---- cuprins lateral: structura vizibila, fara efecte ---- */
+.toc{position:fixed;left:24px;top:150px;width:210px;z-index:15}
+.toc-t{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.18em;
+text-transform:uppercase;color:#8a8a84;margin:0 0 14px;padding-left:12px}
+.toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
+.toc li{margin:0}
+.toc a{display:block;padding:7px 12px;margin-left:-1px;font-size:13px;line-height:1.35;
+color:#6b6b6b;text-decoration:none;border-left:2px solid transparent;
+transition:color .12s ease,border-color .12s ease}
+.toc a:hover{color:var(--ink)}
+.toc a:focus-visible{outline:2px solid var(--magenta);outline-offset:-2px}
+.toc li.on a{color:var(--ink);font-weight:600;border-left-color:var(--magenta)}
+.toc li.ok a{color:var(--magenta-text)}
+.toc li.ok a::after{content:" \2713";font-weight:600}
+.toc-c{margin:16px 0 0;padding-left:12px;font-size:12px;color:#8a8a84;line-height:1.5}
+.toc-c b{display:block;color:var(--ink);font-size:13px;font-family:var(--display)}
+/* sub 1180px nu mai incape langa continut */
+@media(max-width:1180px){.toc{display:none}}
 header.hero{padding:72px 0 60px;text-align:center}
 .eyebrow{display:block;font-family:var(--mono);font-size:12px;font-weight:500;
 letter-spacing:.18em;text-transform:uppercase;color:var(--magenta-text);margin:0 0 26px}
@@ -51,7 +70,7 @@ margin-bottom:26px;border-radius:10px}
 .lead .demo{background:var(--ess);padding:12px 14px;margin:14px 0}
 
 .card{background:var(--card);border:1px solid var(--line);padding:30px 32px;
-margin-bottom:20px;border-radius:10px}
+margin-bottom:20px;border-radius:10px;scroll-margin-top:120px}
 .card h2{font-family:var(--display);font-weight:700;font-size:20px;margin:0 0 2px;
 color:var(--magenta-text);letter-spacing:-.015em}
 .card h2 .num{color:var(--ink)}
@@ -110,6 +129,21 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
   <div class="wrap"><div class="track"><i id="fill"></i></div></div>
 </div>
 
+<nav class="toc" id="toc" aria-label="Cuprinsul fisei">
+  <p class="toc-t">Cuprins</p>
+  <ol>
+    <li data-t="0"><a href="#sec0">Despre rol</a></li>
+    <li data-t="1"><a href="#sec1">1. Motivul angajarii</a></li>
+    <li data-t="2"><a href="#sec2">2. Rezultatele asteptate</a></li>
+    <li data-t="3"><a href="#sec3">3. Contextul de business</a></li>
+    <li data-t="4"><a href="#sec4">4. Linia de raportare</a></li>
+    <li data-t="5"><a href="#sec5">5. Profilul candidatului</a></li>
+    <li data-t="6"><a href="#sec6">6. Procesul si decizia</a></li>
+    <li data-t="7"><a href="#sec7">7. Pachetul si propunerea</a></li>
+  </ol>
+  <p class="toc-c"><b id="toc-n">0 din 49</b>raspunsuri completate</p>
+</nav>
+
 <div class="herowrap">
   <div class="wrap">
     <header class="hero">
@@ -132,7 +166,7 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
 <form id="form" action="https://formspree.io/f/mppazdej" method="POST">
 <input type="hidden" name="_subject" value="Fisa de rol completata - Zebra People">
 
-<section class="card" data-sec="0">
+<section class="card" id="sec0" data-sec="0">
   <h2>Despre rol</h2>
   <p class="who">&nbsp;</p>
   <div class="f ess">
@@ -152,7 +186,7 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
   </div>
 </section>
 
-<section class="card" data-sec="1">
+<section class="card" id="sec1" data-sec="1">
       <h2><span class="num">1.</span> Motivul angajarii</h2>
       <p class="en">Hiring trigger</p>
       <p class="who">Raspunde de regula: directorul general sau decidentul</p>
@@ -194,7 +228,7 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
     </div>
       <div class="note"><strong>De ce intrebam.</strong> Daca un rol s-a blocat deja o data, merita sa intelegem ce s-a schimbat intre timp. Altfel, riscul este sa repetam acelasi proces si sa obtinem acelasi rezultat.</div>
     </section>
-<section class="card" data-sec="2">
+<section class="card" id="sec2" data-sec="2">
       <h2><span class="num">2.</span> Rezultatele asteptate</h2>
       <p class="en">Role outcome</p>
       <p class="who">Raspunde de regula: managerul direct al rolului</p>
@@ -246,7 +280,7 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
     </div>
       <div class="note"><strong>De ce intrebam.</strong> Orice candidat bun descopera partile dificile ale rolului in primele saptamani. Daca le cunoaste dinainte, decizia lui este informata si ramane. Daca le afla dupa semnare, creste riscul unei plecari rapide.</div>
     </section>
-<section class="card" data-sec="3">
+<section class="card" id="sec3" data-sec="3">
       <h2><span class="num">3.</span> Contextul de business</h2>
       <p class="en">Business context</p>
       <p class="who">Raspunde de regula: managerul direct al rolului</p>
@@ -268,7 +302,7 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
     </div>
       
     </section>
-<section class="card" data-sec="4">
+<section class="card" id="sec4" data-sec="4">
       <h2><span class="num">4.</span> Linia de raportare</h2>
       <p class="en">Reporting line</p>
       <p class="who">Raspunde de regula: managerul direct al rolului</p>
@@ -300,7 +334,7 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
     </div>
       
     </section>
-<section class="card" data-sec="5">
+<section class="card" id="sec5" data-sec="5">
       <h2><span class="num">5.</span> Profilul candidatului</h2>
       <p class="en">Candidate profile</p>
       <p class="who">Raspund impreuna: decidentul si managerul direct</p>
@@ -332,7 +366,7 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
     </div>
       <div class="note"><strong>De ce intrebam.</strong> „Experienta in vanzare B2B” inseamna altceva la 3 ani fata de 10 ani. Diferenta schimba atat locul unde cautam, cat si nivelul salarial la care putem atrage persoana.</div>
     </section>
-<section class="card" data-sec="6">
+<section class="card" id="sec6" data-sec="6">
       <h2><span class="num">6.</span> Procesul si decizia</h2>
       <p class="en">Decision-making</p>
       <p class="who">Raspunde de regula: decidentul sau departamentul de HR</p>
@@ -374,7 +408,7 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
     </div>
       <div class="note"><strong>De ce intrebam.</strong> Candidatii buni sunt, de cele mai multe ori, implicati in mai multe discutii in paralel. Un proces lent, cu etape neclare sau feedback intarziat, reduce sansele de acceptare chiar si atunci cand rolul este atractiv. Iar daca decidentul final nu participa la niciun interviu, discutia se blocheaza de regula la ofertare.</div>
     </section>
-<section class="card" data-sec="7">
+<section class="card" id="sec7" data-sec="7">
       <h2><span class="num">7.</span> Pachetul si propunerea</h2>
       <p class="en">Offer and proposition</p>
       <p class="who">Raspunde de regula: decidentul sau departamentul de HR</p>
@@ -450,7 +484,9 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
       fields=[].slice.call(form.querySelectorAll('input[type=text],textarea')),
       cards=[].slice.call(document.querySelectorAll('.card[data-sec]')),
       pos=document.getElementById('pos'), eta=document.getElementById('eta'),
-      fill=document.getElementById('fill'), TOTAL=18;
+      fill=document.getElementById('fill'), TOTAL=18,
+      tocLi=[].slice.call(document.querySelectorAll('#toc li')),
+      tocN=document.getElementById('toc-n');
 
   function filled(){ return fields.filter(function(f){return f.value.trim()!==''}).length; }
 
@@ -461,12 +497,22 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
     eta.textContent = done===fields.length ? 'gata de trimis'
       : done===0 ? '15-20 minute'
       : 'aproximativ '+left+(left===1?' minut':' minute');
+    if(tocN) tocN.textContent = done+' din '+fields.length;
+    tocLi.forEach(function(li){
+      var c=document.getElementById('sec'+li.dataset.t);
+      if(!c) return;
+      var f=[].slice.call(c.querySelectorAll('input[type=text],textarea'));
+      li.classList.toggle('ok', f.length>0 && f.every(function(x){return x.value.trim()!==''}));
+    });
   }
 
   function seen(){
-    var top=window.scrollY+160, cur=1;
-    cards.forEach(function(c){ if(c.offsetTop<=top){ var n=+c.dataset.sec; if(n>0) cur=n; } });
+    var cur=1, curT=0;
+    cards.forEach(function(c){
+      if(c.getBoundingClientRect().top<=200){ var n=+c.dataset.sec; curT=n; if(n>0) cur=n; }
+    });
     pos.textContent='Sectiunea '+cur+' din 7';
+    tocLi.forEach(function(li){ li.classList.toggle('on', +li.dataset.t===curT); });
   }
 
   fields.forEach(function(f){
