@@ -140,9 +140,13 @@ transition:background-color .12s ease}
 .submit:focus-visible{outline:2px solid var(--magenta);outline-offset:2px}
 .foot{text-align:center;color:var(--muted);font-size:13px;margin-top:22px;line-height:1.7}
 
-#done{display:none;background:var(--card);border:1px solid var(--line);
-border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
-#done h2{margin:0 0 14px;font-size:23px;font-family:var(--display);font-weight:700;letter-spacing:-.02em}
+#done{display:none;background:var(--card);border:2px solid var(--ink);outline:none;
+border-radius:4px;padding:44px 40px;text-align:left;scroll-margin-top:130px}
+#done .tick{width:60px;height:60px;margin:0 0 22px;border-radius:50%;
+background:var(--magenta);display:flex;align-items:center;justify-content:center}
+#done .tick svg{width:30px;height:30px;display:block}
+#done h2{margin:0 0 16px;font-size:25px;font-family:var(--display);font-weight:800;
+letter-spacing:-.02em}
 #done p{margin:0 0 12px;color:#333}
 @media(max-width:640px){
  .card{padding:20px}
@@ -509,9 +513,12 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
 </form>
 
 <div id="done">
+  <div class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff"
+    stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 7"/></svg></div>
   <h2>Am primit fisa de rol</h2>
-  <p>Va trimitem in doua zile lucratoare <strong>analiza rolului</strong>: ce am inteles, unde vedem riscuri, ce anticipam ca va fi dificil si cum arata piata pentru profilul cerut, cu argumentele din spate.</p>
-  <p>Daca apar zone care merita clarificate inainte de a incepe cautarea, vi le semnalam si le discutam impreuna.</p>
+  <p>Multumim. Am primit informatiile transmise si vom analiza rolul in contextul obiectivelor companiei, cerintelor definite si realitatii din piata.</p>
+  <p>Revenim in maximum doua zile lucratoare cu o <strong>analiza initiala a rolului</strong>: ce am inteles, unde vedem riscuri, ce poate ingreuna cautarea si cum arata piata pentru profilul cerut.</p>
+  <p>Daca identificam aspecte care merita clarificate inainte de lansarea cautarii, le vom semnala si le vom discuta impreuna.</p>
   <p style="color:#6b6b6b;font-size:14px;margin-top:20px">Cristian Tuica &middot; Recruitment Partner<br>0725 543 063 &middot; cristian.tuica@zebramarket.ro</p>
 </div>
 </div>
@@ -705,8 +712,18 @@ border-top:3px solid var(--magenta);padding:34px 30px;text-align:left}
     var btn=form.querySelector('.submit'); btn.disabled=true; btn.textContent='Se trimite...';
     fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
       .then(function(r){
-        if(r.ok){ form.style.display='none'; document.getElementById('done').style.display='block';
-          window.scrollTo({top:0,behavior:'smooth'}); }
+        if(r.ok){
+          form.style.display='none';
+          var lead=document.querySelector('.lead'); if(lead) lead.style.display='none';
+          var hero=document.querySelector('.herowrap'); if(hero) hero.style.display='none';
+          var toc=document.getElementById('toc'); if(toc) toc.style.display='none';
+          var meta=document.querySelector('.bar .meta'); if(meta) meta.style.display='none';
+          var track=document.querySelector('.bar .track'); if(track) track.style.display='none';
+          var done=document.getElementById('done');
+          done.style.display='block';
+          done.scrollIntoView({behavior:'smooth',block:'center'});
+          done.setAttribute('tabindex','-1'); done.focus({preventScroll:true});
+        }
         else{ btn.disabled=false; btn.textContent='Trimite fisa de rol';
           alert('Trimiterea nu a reusit. Va rugam incercati din nou sau scrieti-ne la office@zebramarket.ro'); }
       })
