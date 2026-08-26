@@ -695,8 +695,8 @@ letter-spacing:-.02em}
     cerRanduri().forEach(function(r,i){
       r.querySelector('.rep-nr').textContent=(i+1)+'.';
       var a=r.querySelector('.cer-c'), b=r.querySelector('.cer-m');
-      a.name='s5_obligatoriu['+i+'][cerinta]';
-      b.name='s5_obligatoriu['+i+'][motiv]';
+      a.name='28. Cerinta obligatorie '+(i+1);
+      b.name='28. De ce este obligatorie '+(i+1);
       a.id='s5cer'+i; b.id='s5mot'+i;
       r.querySelector('.rep-sterge').disabled = cerRanduri().length<=1;
     });
