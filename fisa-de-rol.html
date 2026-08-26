@@ -53,8 +53,6 @@ transition:color .12s ease,border-color .12s ease}
 .toc li.on a{color:var(--ink);font-weight:600;border-left-color:var(--magenta)}
 .toc li.ok a{color:var(--magenta-text)}
 .toc li.ok a::after{content:" \2713";font-weight:600}
-.toc-c{margin:16px 0 0;padding-left:12px;font-size:12px;color:#8a8a84;line-height:1.5}
-.toc-c b{display:block;color:var(--ink);font-size:13px;font-family:var(--display)}
 /* sub 1180px nu mai incape langa continut */
 @media(max-width:1180px){.toc{display:none}}
 header.hero{padding:88px 0 74px;text-align:center}
@@ -85,6 +83,7 @@ padding-bottom:16px;border-bottom:2px solid var(--magenta)}
 
 .f{margin-bottom:20px;padding:0}
 .f.ess{background:var(--ess);padding:14px 16px;margin-left:-16px;margin-right:-16px}
+.f.oblig label::after{content:" *";color:var(--magenta);font-weight:700}
 .f label{display:block;font-family:var(--display);font-weight:700;font-size:13px;
 margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase}
 .f label .hint{text-transform:none;letter-spacing:0}
@@ -122,6 +121,28 @@ transition:background-color .12s ease,color .12s ease}
 .lng.en{color:var(--magenta-text);border-color:var(--magenta)}
 .voice-on .f input[type=text]{padding-right:96px}
 .voice-on .f textarea{padding-right:96px}
+/* ---- cerinte obligatorii: randuri repetabile, maximum cinci ---- */
+.rep{margin-bottom:10px}
+.rep-rand{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+.rep-nr{flex:0 0 26px;padding-top:11px;font-family:var(--mono);font-size:12px;
+font-weight:500;color:var(--muted);text-align:right}
+.rep-campuri{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:10px;min-width:0}
+.rep-campuri .box{min-width:0}
+.rep-sterge{flex:0 0 32px;height:32px;margin-top:6px;padding:0;font:inherit;font-size:17px;
+line-height:1;color:var(--muted);background:#fff;border:2px solid var(--line);
+border-radius:4px;cursor:pointer;transition:color .12s ease,border-color .12s ease}
+.rep-sterge:hover{color:#C0135C;border-color:#C0135C}
+.rep-sterge:focus-visible{outline:2px solid var(--magenta);outline-offset:2px}
+.rep-add{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.03em;
+text-transform:uppercase;color:var(--ink);background:#fff;border:2px solid var(--ink);
+border-radius:4px;padding:9px 15px;cursor:pointer;
+transition:background-color .12s ease,color .12s ease,border-color .12s ease}
+.rep-add:hover:not(:disabled){background:var(--ess)}
+.rep-add:focus-visible{outline:2px solid var(--magenta);outline-offset:2px}
+.rep-add:disabled{color:#a5a5a0;border-color:var(--line);cursor:default}
+.rep-plin{display:none;font-size:12.5px;color:var(--muted);margin-top:8px}
+.rep-plin.show{display:block}
+@media(max-width:640px){.rep-campuri{grid-template-columns:1fr}}
 /* ---- progres salvat local ---- */
 .saved{display:none;align-items:center;gap:8px;margin:0 0 22px;padding:11px 14px;
 background:var(--card);border:2px solid var(--ink);border-radius:4px;
@@ -204,7 +225,6 @@ letter-spacing:-.02em}
     <li data-t="6"><a href="#sec6">6. Procesul de selectie</a></li>
     <li data-t="7"><a href="#sec7">7. Pachetul si oferta</a></li>
   </ol>
-  <p class="toc-c"><b id="toc-n">0 din 49</b>raspunsuri completate</p>
  </div>
 </nav>
 <div class="lead">
@@ -222,20 +242,20 @@ letter-spacing:-.02em}
 <section class="card" id="sec0" data-sec="0">
   <h2>Despre rol</h2>
   <p class="who">&nbsp;</p>
-  <div class="f ess">
+  <div class="f oblig">
     <label for="rol">Rolul pentru care recrutati</label>
-    <input type="text" name="01. Rolul pentru care recrutati" id="rol" data-ess="1" placeholder="exemplu: Sales Manager">
-    <span class="err">Camp esential pentru a incepe cautarea</span>
+    <input type="text" name="01. Rolul pentru care recrutati" id="rol" placeholder="exemplu: Sales Manager" data-oblig="1">
+    <span class="err"></span>
   </div>
-  <div class="f ess">
+  <div class="f oblig">
     <label for="companie">Compania</label>
-    <input type="text" name="02. Compania" id="companie" data-ess="1" placeholder="exemplu: Delta Industries">
-    <span class="err">Camp esential pentru a incepe cautarea</span>
+    <input type="text" name="02. Compania" id="companie" placeholder="exemplu: Delta Industries" data-oblig="1">
+    <span class="err"></span>
   </div>
-  <div class="f ess">
+  <div class="f oblig">
     <label for="persoana">Persoana de contact<span class="hint">Nume si email</span></label>
-    <input type="text" name="03. Persoana de contact" id="persoana" data-ess="1" placeholder="exemplu: Popescu Georgescu, popescu@companie.ro">
-    <span class="err">Camp esential pentru a incepe cautarea</span>
+    <input type="text" name="03. Persoana de contact" id="persoana" placeholder="exemplu: Popescu Georgescu, popescu@companie.ro" data-oblig="1">
+    <span class="err"></span>
   </div>
 </section>
 
@@ -244,40 +264,30 @@ letter-spacing:-.02em}
       <p class="en">Hiring trigger</p>
       <p class="who">Raspunde de regula: directorul general sau decidentul</p>
       
-      <div class="f ess">
-      <label for="s1q1">De ce recrutati?<span class="hint">Inlocuire, crestere, competenta noua, restructurare</span></label>
-      <textarea name="04. De ce recrutati?" id="s1q1" rows="3" data-ess="1" placeholder="exemplu: competenta noua. Pana acum vanzarea a fost facuta de fondator, direct."></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <div class="f">
+      <label for="s1q1">De ce recrutati acest rol acum? Ce a creat nevoia?<span class="hint">Inlocuire, crestere, competenta noua, restructurare. Ce s-a schimbat fata de anul trecut</span></label>
+      <textarea name="04. De ce recrutati?" id="s1q1" rows="3" placeholder="exemplu: competenta noua. Pana acum vanzarea a fost facuta de fondator, direct."></textarea>
+      <span class="err"></span>
     </div>
 <div class="f ess">
       <label for="s1q2">Ce problema de business rezolva aceasta persoana?<span class="hint">Cat mai concret</span></label>
-      <textarea name="05. Ce problema de business rezolva aceasta persoana?" id="s1q2" rows="3" data-ess="1" placeholder="exemplu: cresterea depinde de un singur om, fondatorul, care nu mai poate acoperi si vanzarea, si operatiunile."></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
-    </div>
-<div class="f">
-      <label for="s1q3">Ce s-a schimbat acum incat acest rol a devenit necesar?<span class="hint">Crestere, plecare, reorganizare, proiect nou</span></label>
-      <textarea name="06. Ce s-a schimbat acum incat acest rol a devenit necesar?" id="s1q3" rows="3" placeholder="exemplu: anul trecut am crescut cu 30% si fondatorul nu mai are timp sa acopere ambele zone."></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <textarea name="05. Ce problema de business rezolva aceasta persoana?" id="s1q2" rows="3" placeholder="exemplu: cresterea depinde de un singur om, fondatorul, care nu mai poate acoperi si vanzarea, si operatiunile." data-ess="1"></textarea>
+      <span class="err"></span>
     </div>
 <div class="f ess">
       <label for="s1q4">Ce se intampla daca rolul ramane neocupat inca sase luni?</label>
-      <textarea name="07. Ce se intampla daca rolul ramane neocupat inca sase luni?" id="s1q4" rows="3" data-ess="1" placeholder="exemplu: ratam bugetul pe 2027 si pierdem clientii mari care cer un interlocutor dedicat."></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <textarea name="07. Ce se intampla daca rolul ramane neocupat inca sase luni?" id="s1q4" rows="3" placeholder="exemplu: ratam bugetul pe 2027 si pierdem clientii mari care cer un interlocutor dedicat." data-ess="1"></textarea>
+      <span class="err"></span>
     </div>
 <div class="f">
       <label for="s1q5">Daca inlocuiti pe cineva: de ce a plecat?<span class="hint">Si ce e diferit acum fata de atunci</span></label>
       <textarea name="08. Daca inlocuiti pe cineva: de ce a plecat?" id="s1q5" rows="3" placeholder="exemplu: a plecat dupa 8 luni pentru ca nu a avut suport de marketing. Intre timp am angajat un om de marketing."></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
 <div class="f">
-      <label for="s1q6">Ati mai recrutat pentru acest rol fara succes?</label>
-      <input type="text" name="09. Ati mai recrutat pentru acest rol fara succes?" id="s1q6" placeholder="exemplu: da, acum patru luni">
-      <span class="err">Camp esential pentru a incepe cautarea</span>
-    </div>
-<div class="f">
-      <label for="s1q7">Daca da, unde s-a blocat?<span class="hint">Candidati, buget, decizie sau oferta</span></label>
-      <textarea name="10. Daca da, unde s-a blocat?" id="s1q7" rows="3" placeholder="exemplu: la buget. Am avut doi finalisti buni, dar amandoi au cerut peste banda noastra."></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <label for="s1q6">Ati mai recrutat pentru acest rol? Daca da, unde s-a blocat procesul?<span class="hint">Candidati, buget, decizie sau oferta</span></label>
+      <textarea name="09. Ati mai recrutat pentru acest rol? Daca da, unde s-a blocat procesul?" id="s1q6" rows="3" placeholder="exemplu: da, acum patru luni. S-a blocat la buget: am avut doi finalisti buni, dar amandoi au cerut peste banda noastra."></textarea>
+      <span class="err"></span>
     </div>
       <div class="note"><strong>De ce conteaza.</strong><br>Daca un rol s-a blocat deja o data, merita sa intelegem ce s-a schimbat intre timp. Altfel, riscul este sa repetam acelasi proces si sa obtinem acelasi rezultat.</div>
     </section>
@@ -288,48 +298,43 @@ letter-spacing:-.02em}
       <p class="intro">Nu incepem cu o lista de responsabilitati. Incepem cu rezultatele pe care acest rol trebuie sa le produca. Aceasta sectiune devine baza pentru criteriile de evaluare si pentru intrebarile de interviu. Va recomandam sa o completati prima.</p>
       <div class="f ess">
       <label for="s2q1a">Facem aceasta angajare pentru ca...</label>
-      <textarea name="11. Facem aceasta angajare pentru ca..." id="s2q1a" rows="3" data-ess="1" placeholder="exemplu: vanzarea depinde astazi exclusiv de fondator"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <textarea name="11. Facem aceasta angajare pentru ca..." id="s2q1a" rows="3" placeholder="exemplu: vanzarea depinde astazi exclusiv de fondator" data-ess="1"></textarea>
+      <span class="err"></span>
     </div>
 <div class="f ess">
       <label for="s2q1b">Dupa 12 luni, ce trebuie sa fie diferit este...</label>
-      <textarea name="12. Dupa 12 luni, ce trebuie sa fie diferit este..." id="s2q1b" rows="3" data-ess="1" placeholder="exemplu: exista un pipeline previzibil, independent de reteaua lui personala"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
-    </div>
-<div class="f ess">
-      <label for="s2q2a">Primele 90 de zile: ce trebuie realizat</label>
-      <textarea name="13. Primele 90 de zile: ce trebuie realizat" id="s2q2a" rows="3" data-ess="1" placeholder="exemplu: preia portofoliul existent de 20 de clienti si cunoaste produsul"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <textarea name="12. Dupa 12 luni, ce trebuie sa fie diferit este..." id="s2q1b" rows="3" placeholder="exemplu: exista un pipeline previzibil, independent de reteaua lui personala" data-ess="1"></textarea>
+      <span class="err"></span>
     </div>
 <div class="f">
-      <label for="s2q2b">Primele 90 de zile: cum stim ca s-a reusit</label>
-      <textarea name="14. Primele 90 de zile: cum stim ca s-a reusit" id="s2q2b" rows="3" placeholder="exemplu: a avut discutii cu toti cei 20 si a preluat relatia de la fondator"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <label for="s2q2a">Primele 90 de zile: ce trebuie realizat si cum masuram succesul?</label>
+      <textarea name="13. Primele 90 de zile: ce trebuie realizat" id="s2q2a" rows="3" placeholder="exemplu: preia portofoliul existent de 20 de clienti si cunoaste produsul. Masuram prin discutii purtate cu toti cei 20 si preluarea relatiei de la fondator."></textarea>
+      <span class="err"></span>
     </div>
 <div class="f">
       <label for="s2q3">Primele 6 luni: ce trebuie realizat si cum se masoara</label>
       <textarea name="15. Primele 6 luni: ce trebuie realizat si cum se masoara" id="s2q3" rows="3" placeholder="exemplu: construieste un pipeline propriu. 15 oportunitati noi in derulare, 3 contracte semnate"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
 <div class="f">
       <label for="s2q4">Primul an: ce trebuie realizat si cum se masoara</label>
       <textarea name="16. Primul an: ce trebuie realizat si cum se masoara" id="s2q4" rows="3" placeholder="exemplu: atinge tinta de vanzari si defineste procesul comercial. 500.000 EUR vanzari noi"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
 <div class="f ess">
       <label for="s2q5">Principalele zone de responsabilitate<span class="hint">Cinci pana la sapte, nu o lista lunga</span></label>
-      <textarea name="17. Principalele zone de responsabilitate" id="s2q5" rows="3" data-ess="1" placeholder="exemplu: prospectare, negociere si semnare contracte, relatia cu clientii existenti, participare la targuri, raportare in CRM"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <textarea name="17. Principalele zone de responsabilitate" id="s2q5" rows="3" placeholder="exemplu: prospectare, negociere si semnare contracte, relatia cu clientii existenti, participare la targuri, raportare in CRM" data-ess="1"></textarea>
+      <span class="err"></span>
     </div>
 <div class="f">
       <label for="s2q6">Ce NU intra in rol?<span class="hint">Ce ar putea presupune gresit un candidat</span></label>
       <textarea name="18. Ce NU intra in rol?" id="s2q6" rows="3" placeholder="exemplu: nu coordoneaza echipa de marketing si nu are oameni in subordine in primul an"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
-<div class="f">
-      <label for="s2q7">Ce este cu adevarat dificil in acest rol si nu se vede din fisa postului?<span class="hint">Constrangeri reale, lipsuri de resurse, presiuni</span></label>
-      <textarea name="19. Ce este cu adevarat dificil in acest rol si nu se vede din fisa postului?" id="s2q7" rows="3" placeholder="exemplu: nu exista inca materiale de vanzare, brandul e putin cunoscut si ciclul de vanzare e lung, intre 4 si 6 luni"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+<div class="f ess">
+      <label for="s2q7">Ce considerati ca este cu adevarat dificil sau provocator in acest rol si nu se vede din fisa postului?<span class="hint">Constrangeri reale, lipsuri de resurse, presiuni</span></label>
+      <textarea name="19. Ce este cu adevarat dificil in acest rol si nu se vede din fisa postului?" id="s2q7" rows="3" placeholder="exemplu: nu exista inca materiale de vanzare, brandul e putin cunoscut si ciclul de vanzare e lung, intre 4 si 6 luni" data-ess="1"></textarea>
+      <span class="err"></span>
     </div>
       <div class="note"><strong>De ce conteaza.</strong><br>Orice candidat bun descopera partile dificile ale rolului in primele saptamani. Daca le cunoaste dinainte, decizia lui este informata si ramane. Daca le afla dupa semnare, creste riscul unei plecari rapide.</div>
     </section>
@@ -341,17 +346,17 @@ letter-spacing:-.02em}
       <div class="f">
       <label for="s3q1">Unde se afla compania acum?<span class="hint">Crestere, reorganizare, intrare pe piata noua, consolidare</span></label>
       <textarea name="20. Unde se afla compania acum?" id="s3q1" rows="3" placeholder="exemplu: crestere accelerata, 30% anul trecut, cu tinta similara anul acesta"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
 <div class="f">
       <label for="s3q2">Ce gaseste persoana in prima zi?<span class="hint">Sisteme, procese, echipa, constrangeri</span></label>
       <textarea name="21. Ce gaseste persoana in prima zi?" id="s3q2" rows="3" placeholder="exemplu: CRM implementat anul trecut dar folosit partial, fara proces de vanzare documentat, echipa de 12 oameni"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
 <div class="f ess">
-      <label for="s3q3">Cum se masoara performanta in acest rol?<span class="hint">Exista deja indicatori definiti sau trebuie construiti? Care sunt si cat de des se raporteaza</span></label>
-      <textarea name="22. Cum se masoara performanta in acest rol?" id="s3q3" rows="3" data-ess="1" placeholder="exemplu: exista partial. Se urmareste valoarea contractelor semnate, raportat lunar. Numarul de oportunitati noi urmeaza sa fie definit impreuna cu persoana angajata."></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <label for="s3q3">Exista deja indicatori de performanta definiti pentru acest rol, sau urmeaza sa fie construiti?<span class="hint">Exista deja indicatori definiti sau trebuie construiti? Care sunt si cat de des se raporteaza</span></label>
+      <textarea name="22. Cum se masoara performanta in acest rol?" id="s3q3" rows="3" placeholder="exemplu: exista partial. Se urmareste valoarea contractelor semnate, raportat lunar. Numarul de oportunitati noi urmeaza sa fie definit impreuna cu persoana angajata." data-ess="1"></textarea>
+      <span class="err"></span>
     </div>
       
     </section>
@@ -362,28 +367,28 @@ letter-spacing:-.02em}
       
       <div class="f ess">
       <label for="s4q1">Raporteaza catre<span class="hint">Nume si functie</span></label>
-      <input type="text" name="23. Raporteaza catre" id="s4q1" data-ess="1" placeholder="exemplu: Popescu Georgescu, Director General">
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <input type="text" name="23. Raporteaza catre" id="s4q1" placeholder="exemplu: Popescu Georgescu, Director General" data-ess="1">
+      <span class="err"></span>
     </div>
 <div class="f">
       <label for="s4q2">Stilul de management al superiorului direct</label>
       <textarea name="24. Stilul de management al superiorului direct" id="s4q2" rows="3" placeholder="exemplu: implicat in primele luni, apoi lasa autonomie. Sedinta saptamanala de status"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
 <div class="f">
       <label for="s4q3">Cati oameni are in subordine?</label>
       <input type="text" name="25. Cati oameni are in subordine?" id="s4q3" placeholder="exemplu: niciunul in primul an. Daca rezultatele confirma, se construieste echipa in jurul lui">
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
 <div class="f">
       <label for="s4q4">Cu cine lucreaza saptamanal<span class="hint">Intern si extern</span></label>
       <textarea name="26. Cu cine lucreaza saptamanal" id="s4q4" rows="3" placeholder="exemplu: intern cu productia si marketingul, extern cu clientii si doi distribuitori"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
 <div class="f ess">
       <label for="s4q5">Ce decide singur si ce decide impreuna cu managerul</label>
-      <textarea name="27. Ce decide singur si ce decide impreuna cu managerul" id="s4q5" rows="3" data-ess="1" placeholder="exemplu: decide singur discountul pana la 10%, peste acest prag decide impreuna cu directorul general"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <textarea name="27. Ce decide singur si ce decide impreuna cu managerul" id="s4q5" rows="3" placeholder="exemplu: decide singur discountul pana la 10%, peste acest prag decide impreuna cu directorul general" data-ess="1"></textarea>
+      <span class="err"></span>
     </div>
       
     </section>
@@ -392,30 +397,32 @@ letter-spacing:-.02em}
       <p class="en">Candidate profile</p>
       <p class="who">Raspund impreuna: decidentul si managerul direct</p>
       <p class="intro">Cand toate cerintele devin obligatorii, piata se restrange rapid. De aceea, diferentiem intre ce este esential, ce se poate invata si ce reprezinta doar un avantaj. Va recomandam maximum cinci cerinte obligatorii.</p>
-      <div class="f ess">
-      <label for="s5must">Cerinte obligatorii<span class="hint">Maximum cinci. Pentru fiecare, scrieti cerinta si de ce este obligatorie</span></label>
-      <textarea name="28. Cerinte obligatorii" id="s5must" rows="5" data-ess="1" placeholder="exemplu: 1. Experienta in vanzare B2B cu ciclu lung, peste 3 luni — produsul nostru se vinde in 4 pana la 6 luni, cu mai multi decidenti&#10;2. A lucrat cu clienti industriali — trebuie sa poarte o discutie tehnica fara sa cheme un inginer"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <div class="f ess" id="wrap-s5must">
+      <label>Cerinte obligatorii<span class="hint">Maximum cinci. Pentru fiecare, scrieti cerinta si de ce este obligatorie</span></label>
+      <div class="rep" id="s5must-randuri"></div>
+      <button type="button" class="rep-add" id="s5must-add">+ Adauga cerinta</button>
+      <span class="rep-plin" id="s5must-plin">Ati ajuns la maximum cinci cerinte obligatorii.</span>
+      <span class="err">Fara acest raspuns nu putem incepe cautarea</span>
     </div>
 <div class="f">
       <label for="s5train">Se poate invata in companie<span class="hint">Ce anume si in cat timp</span></label>
       <textarea name="29. Se poate invata in companie" id="s5train" rows="3" placeholder="exemplu: cunoasterea produsului nostru, doua luni, avem training intern. CRM-ul folosit de noi, doua saptamani"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
 <div class="f">
-      <label for="s5nice">Avantaj, dar nu conditie</label>
+      <label for="s5nice">Ce experienta sau competenta ar fi un avantaj, dar nu este obligatorie?</label>
       <textarea name="30. Avantaj, dar nu conditie" id="s5nice" rows="3" placeholder="exemplu: retea existenta de clienti in industria noastra, studii tehnice"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
 <div class="f">
-      <label for="s5excl">Ce exclude automat un candidat<span class="hint">Situatia si motivul</span></label>
+      <label for="s5excl">Care sunt maximum 3 criterii care ar face un candidat nepotrivit pentru rol?<span class="hint">Situatia si motivul</span></label>
       <textarea name="31. Ce exclude automat un candidat" id="s5excl" rows="3" placeholder="exemplu: nu poate calatori 2-3 zile pe luna, rolul presupune vizite lunare la clientii din tara"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
 <div class="f ess">
       <label for="s5exp">Ce experienta e necesara cu adevarat?<span class="hint">In ani sau in tip de expunere</span></label>
-      <textarea name="32. Ce experienta e necesara cu adevarat?" id="s5exp" rows="3" data-ess="1" placeholder="exemplu: minimum 5 ani in vanzare B2B, dintre care cel putin 2 pe produs tehnic. Conteaza mai mult expunerea la ciclu lung decat numarul de ani."></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <textarea name="32. Ce experienta e necesara cu adevarat?" id="s5exp" rows="3" placeholder="exemplu: minimum 5 ani in vanzare B2B, dintre care cel putin 2 pe produs tehnic. Conteaza mai mult expunerea la ciclu lung decat numarul de ani." data-ess="1"></textarea>
+      <span class="err"></span>
     </div>
       <div class="note"><strong>De ce conteaza.</strong><br>Senioritatea rolului schimba piata tinta, nivelul salarial si mesajul de atragere. O cerinta formulata generic poate duce la profiluri foarte diferite, de la executie individuala pana la leadership comercial.</div>
     </section>
@@ -426,38 +433,23 @@ letter-spacing:-.02em}
       
       <div class="f ess">
       <label for="s6q1">Cine ia decizia finala si la ce etapa participa?<span class="hint">Nume si functie</span></label>
-      <textarea name="33. Cine ia decizia finala si la ce etapa participa?" id="s6q1" rows="3" data-ess="1" placeholder="exemplu: Popescu Georgescu, Director General. Participa la etapa a doua."></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <textarea name="33. Cine ia decizia finala si la ce etapa participa?" id="s6q1" rows="3" placeholder="exemplu: Popescu Georgescu, Director General. Participa la etapa a doua." data-ess="1"></textarea>
+      <span class="err"></span>
     </div>
 <div class="f">
-      <label for="s6q2">Cine mai participa la interviuri?</label>
-      <input type="text" name="34. Cine mai participa la interviuri?" id="s6q2" placeholder="exemplu: HR Manager in prima etapa, directorul de productie in etapa a doua">
-      <span class="err">Camp esential pentru a incepe cautarea</span>
-    </div>
-<div class="f ess">
-      <label for="s6q3">Cate etape are procesul?</label>
-      <input type="text" name="35. Cate etape are procesul?" id="s6q3" data-ess="1" placeholder="exemplu: doua">
-      <span class="err">Camp esential pentru a incepe cautarea</span>
-    </div>
-<div class="f">
-      <label for="s6q4">Exista o proba practica sau o tema de lucru?</label>
-      <input type="text" name="36. Exista o proba practica sau o tema de lucru?" id="s6q4" placeholder="exemplu: da, o simulare de discutie cu un client, in etapa a doua">
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <label for="s6q3">Descrieti etapele procesului si ce se intampla la fiecare, inclusiv eventuale teste, teme sau discutii tehnice.</label>
+      <textarea name="35. Descrieti etapele procesului si ce se intampla la fiecare" id="s6q3" rows="3" placeholder="exemplu: doua etape. Prima, discutie cu HR. A doua, interviu cu directorul general si o simulare de discutie cu un client."></textarea>
+      <span class="err"></span>
     </div>
 <div class="f ess">
       <label for="s6q5">In cate zile lucratoare dati feedback dupa fiecare etapa?</label>
-      <input type="text" name="37. In cate zile lucratoare dati feedback dupa fiecare etapa?" id="s6q5" data-ess="1" placeholder="exemplu: maximum trei">
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <input type="text" name="37. In cate zile lucratoare dati feedback dupa fiecare etapa?" id="s6q5" placeholder="exemplu: maximum trei" data-ess="1">
+      <span class="err"></span>
     </div>
 <div class="f">
       <label for="s6q6">Cat dureaza tot procesul, de la primul CV la oferta?</label>
       <input type="text" name="38. Cat dureaza tot procesul, de la primul CV la oferta?" id="s6q6" placeholder="exemplu: aproximativ trei saptamani">
-      <span class="err">Camp esential pentru a incepe cautarea</span>
-    </div>
-<div class="f">
-      <label for="s6q7">Perioade de indisponibilitate<span class="hint">Concedii, sedinte de board, inchidere de an</span></label>
-      <input type="text" name="39. Perioade de indisponibilitate" id="s6q7" placeholder="exemplu: prima saptamana din septembrie, directorul general e plecat">
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
       <div class="note"><strong>De ce conteaza.</strong><br>Procesul de selectie este parte din oferta. Candidatii buni compara oportunitati, viteza de decizie si nivelul de claritate al companiei. Cu cat procesul este mai lent sau mai nealiniat, cu atat creste riscul de a pierde candidati relevanti.</div>
     </section>
@@ -468,53 +460,48 @@ letter-spacing:-.02em}
       <p class="intro">Candidatii pe care ii cautam au, de regula, deja un loc de munca. Pentru a-i atrage intr-o discutie, avem nevoie de o propunere clara: de ce rolul merita atentia lor?</p>
       <div class="f ess">
       <label for="s7q1">Interval salarial</label>
-      <input type="text" name="40. Interval salarial" id="s7q1" data-ess="1" placeholder="exemplu: 2.000 - 2.800 EUR net pe luna">
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <input type="text" name="40. Interval salarial" id="s7q1" placeholder="exemplu: 2.000 - 2.800 EUR net pe luna" data-ess="1">
+      <span class="err"></span>
     </div>
 <div class="f ess">
       <label for="s7q2">Statutul bandei salariale<span class="hint">Aprobata de decident / orientativa, urmeaza aprobarea / nu s-a discutat inca</span></label>
-      <input type="text" name="41. Statutul bandei salariale" id="s7q2" data-ess="1" placeholder="exemplu: aprobata de directorul general">
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <input type="text" name="41. Statutul bandei salariale" id="s7q2" placeholder="exemplu: aprobata de directorul general" data-ess="1">
+      <span class="err"></span>
     </div>
 <div class="f">
       <label for="s7q3">Bonus sau comision</label>
       <textarea name="42. Bonus sau comision" id="s7q3" rows="3" placeholder="exemplu: 2% din valoarea contractelor semnate, platit trimestrial"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
 <div class="f">
       <label for="s7q4">Alte beneficii</label>
       <textarea name="43. Alte beneficii" id="s7q4" rows="3" placeholder="exemplu: masina de serviciu, telefon, laptop, abonament medical"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
 <div class="f">
       <label for="s7q5">Tip de contract, mod de lucru, deplasari</label>
       <textarea name="44. Tip de contract, mod de lucru, deplasari" id="s7q5" rows="3" placeholder="exemplu: contract individual de munca, hibrid cu doua zile la birou, deplasari doua-trei zile pe luna"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
 <div class="f">
-      <label for="s7q6">Data dorita de incepere</label>
+      <label for="s7q6">Care este termenul realist in care vreti persoana in rol?</label>
       <input type="text" name="45. Data dorita de incepere" id="s7q6" placeholder="exemplu: 1 noiembrie 2026">
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
 <div class="f">
       <label for="s7q7">Exista flexibilitate la buget pentru un candidat foarte bun?</label>
       <input type="text" name="46. Exista flexibilitate la buget pentru un candidat foarte bun?" id="s7q7" placeholder="exemplu: da, pana la 3.000 EUR daca aduce portofoliu propriu">
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
 <div class="f">
-      <label for="s7q8">De ce ar accepta un candidat foarte bun acest rol?<span class="hint">Trei motive concrete. Ganditi-va la ce va diferentiaza de alti angajatori care cauta acelasi profil</span></label>
+      <label for="s7q8">Care sunt cele 2-3 motive reale pentru care un candidat foarte bun ar alege acest rol in locul unei alternative?<span class="hint">Trei motive concrete. Ganditi-va la ce va diferentiaza de alti angajatori care cauta acelasi profil</span></label>
       <textarea name="47. De ce ar accepta un candidat foarte bun acest rol?" id="s7q8" rows="3" placeholder="exemplu: construieste functia comerciala de la zero, comision fara plafon, acces direct la directorul general"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <span class="err"></span>
     </div>
-<div class="f">
-      <label for="s7q9">Cine sunt principalii dumneavoastra concurenti pe piata muncii?</label>
-      <textarea name="48. Cine sunt principalii dumneavoastra concurenti pe piata muncii?" id="s7q9" rows="3" placeholder="exemplu: distribuitorii internationali din zona noastra, care platesc mai bine dar dau mai putina autonomie"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
-    </div>
-<div class="f">
+<div class="f ess">
       <label for="s7q10">Exista companii de la care preferati sa nu abordam candidati?</label>
-      <textarea name="49. Exista companii de la care preferati sa nu abordam candidati?" id="s7q10" rows="3" placeholder="exemplu: doi parteneri comerciali cu care avem contracte in derulare"></textarea>
-      <span class="err">Camp esential pentru a incepe cautarea</span>
+      <textarea name="49. Exista companii de la care preferati sa nu abordam candidati?" id="s7q10" rows="3" placeholder="exemplu: doi parteneri comerciali cu care avem contracte in derulare" data-ess="1"></textarea>
+      <span class="err"></span>
     </div>
       <div class="note"><strong>De ce conteaza.</strong><br>Un buget validat de la inceput creste sansele de finalizare. Fara aliniere pe pachet, procesul poate ajunge la oferta cu asteptari diferite intre candidat, companie si realitatea pietei.</div>
     </section>
@@ -542,18 +529,17 @@ letter-spacing:-.02em}
       pos=document.getElementById('pos'), eta=document.getElementById('eta'),
       fill=document.getElementById('fill'), TOTAL=10,
       tocLi=[].slice.call(document.querySelectorAll('#toc li')),
-      tocN=document.getElementById('toc-n');
+      tocN=null;   /* numaratoarea nu se afiseaza: orice cifra devine tinta de umplut */
 
-  function filled(){ return fields.filter(function(f){return f.value.trim()!==''}).length; }
+  function filled(){ return fields.filter(function(f){return f.value.trim()!==''}).length + (typeof cerCompletate==='function' && cerCompletate()>0 ? 1 : 0); }
 
   function tick(){
-    var done=filled(), pct=done/fields.length,
+    var done=filled(), pct=done/INTREBARI,
         left=Math.max(1,Math.round(TOTAL*(1-pct)));
     fill.style.width=(pct*100)+'%';
-    eta.textContent = done===fields.length ? 'gata de trimis'
+    eta.textContent = done===INTREBARI ? 'gata de trimis'
       : done===0 ? 'aproximativ 10 minute'
       : 'aproximativ '+left+(left===1?' minut':' minute');
-    if(tocN) tocN.textContent = done+' din '+fields.length;
     tocLi.forEach(function(li){
       var c=document.getElementById('sec'+li.dataset.t);
       if(!c) return;
@@ -695,9 +681,70 @@ letter-spacing:-.02em}
     window.addEventListener('beforeunload', opreste);
   })();
 
+  /* ---- cerinte obligatorii: randuri repetabile, maximum cinci ----
+     indexul din name se recalculeaza la fiecare adaugare si stergere */
+  var INTREBARI=42;
+  var MAX_CER=5;
+  var cerGazda=document.getElementById('s5must-randuri'),
+      cerAdd=document.getElementById('s5must-add'),
+      cerPlin=document.getElementById('s5must-plin');
+
+  function cerRanduri(){ return [].slice.call(cerGazda.querySelectorAll('.rep-rand')); }
+
+  function cerReindexeaza(){
+    cerRanduri().forEach(function(r,i){
+      r.querySelector('.rep-nr').textContent=(i+1)+'.';
+      var a=r.querySelector('.cer-c'), b=r.querySelector('.cer-m');
+      a.name='s5_obligatoriu['+i+'][cerinta]';
+      b.name='s5_obligatoriu['+i+'][motiv]';
+      a.id='s5cer'+i; b.id='s5mot'+i;
+      r.querySelector('.rep-sterge').disabled = cerRanduri().length<=1;
+    });
+    var plin=cerRanduri().length>=MAX_CER;
+    cerAdd.disabled=plin;
+    cerPlin.classList.toggle('show',plin);
+  }
+
+  function cerAdauga(valC,valM){
+    if(cerRanduri().length>=MAX_CER) return null;
+    var r=document.createElement('div');
+    r.className='rep-rand';
+    r.innerHTML='<span class="rep-nr"></span>'
+      +'<div class="rep-campuri">'
+      +'<input type="text" class="cer-c" placeholder="cerinta">'
+      +'<input type="text" class="cer-m" placeholder="de ce este obligatorie">'
+      +'</div>'
+      +'<button type="button" class="rep-sterge" aria-label="Sterge cerinta">&times;</button>';
+    cerGazda.appendChild(r);
+    if(valC) r.querySelector('.cer-c').value=valC;
+    if(valM) r.querySelector('.cer-m').value=valM;
+    r.querySelector('.rep-sterge').addEventListener('click',function(){
+      r.remove(); cerReindexeaza(); tick();
+    });
+    cerReindexeaza();
+    return r;
+  }
+
+  cerGazda.addEventListener('input',function(){ tick(); });
+
+  cerAdd.addEventListener('click',function(){
+    var r=cerAdauga();
+    if(r) r.querySelector('.cer-c').focus();
+  });
+
+  // primul rand exista dintotdeauna
+  cerAdauga();
+
+  function cerCompletate(){
+    return cerRanduri().filter(function(r){
+      return r.querySelector('.cer-c').value.trim()!=='';
+    }).length;
+  }
+
   /* ---- progres salvat in browserul clientului ----
      nimic nu pleaca de aici pana la trimitere; se sterge dupa ce fisa a fost trimisa */
-  var STORE='zp-fisa-progres';
+  var SCHEMA=3;
+  var STORE='zp-fisa-progres-v'+SCHEMA;
   var trimis=false;
 
   function scrieProgres(){
@@ -705,6 +752,10 @@ letter-spacing:-.02em}
     try{
       var d={};
       fields.forEach(function(f){ if(f.value.trim()!=='') d[f.id]=f.value; });
+      var cer=cerRanduri().map(function(r){
+        return {c:r.querySelector('.cer-c').value, m:r.querySelector('.cer-m').value};
+      }).filter(function(x){ return x.c.trim()!=='' || x.m.trim()!==''; });
+      if(cer.length) d.__cerinte=cer;
       if(Object.keys(d).length) localStorage.setItem(STORE, JSON.stringify(d));
       else localStorage.removeItem(STORE);
     }catch(e){}
@@ -724,10 +775,17 @@ letter-spacing:-.02em}
     el.querySelector('.x').addEventListener('click', function(){
       stergeProgres(); trimis=false;
       fields.forEach(function(f){ f.value=''; });
+      cerGazda.innerHTML=''; cerAdauga();
       el.remove(); tick(); seen();
       window.scrollTo({top:0,behavior:'smooth'});
     });
   }
+
+  // drafturi de pe schema veche: ignorate, altfel campurile combinate primesc valori gresite
+  try{
+    localStorage.removeItem('zp-fisa-progres');
+    for(var vi=1; vi<SCHEMA; vi++) localStorage.removeItem('zp-fisa-progres-v'+vi);
+  }catch(e){}
 
   // la deschidere: restaurez ce exista
   try{
@@ -737,6 +795,12 @@ letter-spacing:-.02em}
       fields.forEach(function(f){
         if(typeof d[f.id]==='string' && d[f.id]!==''){ f.value=d[f.id]; n++; }
       });
+      if(Array.isArray(d.__cerinte) && d.__cerinte.length){
+        cerGazda.innerHTML='';
+        d.__cerinte.slice(0,MAX_CER).forEach(function(x){ cerAdauga(x.c,x.m); });
+        if(!cerRanduri().length) cerAdauga();
+        n+=d.__cerinte.filter(function(x){return (x.c||'').trim()!==''}).length;
+      }
       if(n) { salvat=n; bannerProgres(n); }
       else stergeProgres();
     }
@@ -754,16 +818,38 @@ letter-spacing:-.02em}
   tick(); seen();
 
   form.addEventListener('submit',function(e){
-    var miss=fields.filter(function(f){
-      return f.dataset.ess==='1' && f.value.trim()==='';
-    });
     document.querySelectorAll('.f.miss').forEach(function(w){w.classList.remove('miss')});
-    if(miss.length){
+
+    var miss=fields.filter(function(f){
+      return (f.dataset.ess==='1' || f.dataset.oblig==='1') && f.value.trim()==='';
+    });
+    miss.forEach(function(f){
+      var w=f.closest('.f'); if(!w) return;
+      w.classList.add('miss');
+      var er=w.querySelector('.err');
+      if(er) er.textContent = f.dataset.oblig==='1'
+        ? 'Camp obligatoriu'
+        : 'Fara acest raspuns nu putem incepe cautarea';
+    });
+
+    // cerintele obligatorii: cel putin una completata
+    var wrapCer=document.getElementById('wrap-s5must');
+    var cerLipsa = cerCompletate()===0;
+    if(cerLipsa){
+      wrapCer.classList.add('miss');
+      var erc=wrapCer.querySelector('.err');
+      if(erc) erc.textContent='Fara acest raspuns nu putem incepe cautarea';
+    }
+
+    if(miss.length || cerLipsa){
       e.preventDefault();
-      miss.forEach(function(f){ var w=f.closest('.f'); if(w) w.classList.add('miss'); });
-      var first=miss[0].closest('.f');
-      window.scrollTo({top:first.getBoundingClientRect().top+window.scrollY-140,behavior:'smooth'});
-      setTimeout(function(){miss[0].focus({preventScroll:true})},400);
+      var primul = cerLipsa && (!miss.length || wrapCer.getBoundingClientRect().top < miss[0].closest('.f').getBoundingClientRect().top)
+        ? wrapCer : miss[0].closest('.f');
+      window.scrollTo({top:primul.getBoundingClientRect().top+window.scrollY-140,behavior:'smooth'});
+      setTimeout(function(){
+        var t = primul===wrapCer ? wrapCer.querySelector('.cer-c') : miss[0];
+        if(t) t.focus({preventScroll:true});
+      },400);
       return;
     }
     e.preventDefault();
